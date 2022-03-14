@@ -21,7 +21,7 @@ class Format(models.Model):
 
 class Sport(models.Model):
     name = models.CharField(max_length=100)
-    hostels = models.ForeignKey("Hostel",  on_delete=models.CASCADE,null= True)
+    hostels = models.ManyToManyField("Hostel",null= True)
     format = models.ForeignKey("Format",  on_delete=models.CASCADE,null= True)
     final_points = models.IntegerField()
     # logo = models.ImageField(default="default.jpg", upload_to="logos")
