@@ -16,11 +16,20 @@ class Format(models.Model):
     def __str__(self):
         return self.format
 
+class Points(models.Model):
+    hostel = models.ForeignKey("Hostel",  on_delete=models.CASCADE)
+    sport = models.ForeignKey("Sport",  on_delete=models.CASCADE)
+    points = models.IntegerField(default=0)
+
 class Sport(models.Model):
     name = models.CharField(max_length=100,null=True)
     hostels = models.ManyToManyField("Hostel")
     format = models.ForeignKey("Format",  on_delete=models.CASCADE,null= True)
+<<<<<<< HEAD
     final_points = models.JSONField(default=dict,null=True,blank=True)
+=======
+    # final_points = models.ManyToManyField("Score",null= True)
+>>>>>>> 836d6ed01db60af6224aa44b641953126bd2ef8f
     # logo = models.ImageField(default="default.jpg", upload_to="logos")
 
     def __str__(self):
@@ -50,6 +59,7 @@ class Stage(models.Model):
 
 class Match(models.Model):
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
+<<<<<<< HEAD
     status = models.ForeignKey('Status', on_delete=models.CASCADE,null= True)
     date_time = models.DateTimeField();
     team1 = models.ForeignKey("Hostel", related_name="team1", on_delete=models.CASCADE,null= True)
@@ -57,6 +67,15 @@ class Match(models.Model):
     stage = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
     score1 = models.IntegerField(null=True,blank=True)
     score2 = models.IntegerField(null=True,blank=True)
+=======
+    status = models.ForeignKey('Status', on_delete=models.CASCADE,null= True) # change to boolean field
+    date_time = models.DateTimeField(auto_now_add=True)
+    team1 = models.ForeignKey("Hostel", related_name="team1", on_delete=models.CASCADE,null= True)
+    team2 = models.ForeignKey("Hostel", related_name="team2", on_delete=models.CASCADE,null= True)
+    stage = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
+    score1 = models.IntegerField(default = 0)
+    score2 = models.IntegerField(default = 0)
+>>>>>>> 836d6ed01db60af6224aa44b641953126bd2ef8f
 
     def __str__(self):
         return self.team1.name+" vs "+self.team2.name

@@ -12,3 +12,11 @@ class StandingsAPIView(ListCreateAPIView):
     #def get(self, request):
     #   data = {"kameng":20}
     #   return Response(data,status=HTTP_200_OK, content_type = 'application/json' )
+    def get(self, request):
+       data = {}
+       sports = Sport.objects.all()
+        
+       for sport in sports:
+        for hostel in sports.hostels:
+            return sport.standings
+       return Response(data,status=HTTP_200_OK, content_type = 'application/json' )
