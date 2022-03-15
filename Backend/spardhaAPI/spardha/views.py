@@ -19,7 +19,7 @@ class StandingsAPIView(ListCreateAPIView):
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     ordering_fields = ['points']
     ordering = ['-points']
-    search_fields = ['hostel__name']
+    search_fields = ['hostel__name','sport__name']
 
 class MatchAPIView(ListCreateAPIView):
     serializer_class = MatchSerializer
@@ -28,4 +28,4 @@ class MatchAPIView(ListCreateAPIView):
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     ordering_fields = ['date_time']
     ordering = ['-date_time']
-    search_fields = ['team1__name','team2__name']
+    search_fields = ['team1__name','team2__name','status','sport__name']
