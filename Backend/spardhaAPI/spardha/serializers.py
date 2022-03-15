@@ -19,6 +19,7 @@ class MatchSerializer(serializers.ModelSerializer):
     team1 = serializers.SlugRelatedField(read_only=True,slug_field='name')
     team2 = serializers.SlugRelatedField(read_only=True,slug_field='name')
     sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
+    status = serializers.SlugRelatedField(read_only=True,slug_field='status')
 
     class Meta:
         model = Match

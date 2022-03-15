@@ -44,6 +44,12 @@ class Sport_League(models.Model):
 class Status(models.Model):
     status = models.BooleanField(help_text="Enter 0 for upcoming and 1 for completed")
 
+    def __str__(self):
+        if(self.status):
+            return "True"
+        else:
+            return "False"
+
 
 class Stage(models.Model):
     stage = models.CharField(max_length=100)
