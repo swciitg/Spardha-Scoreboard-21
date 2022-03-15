@@ -5,6 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Hostel,Point,Match
 from .serializers import HostelSerializer,StandingSerializer,MatchSerializer
 
+from django.views.generic import ListView,UpdateView
 # Create your views here.
 
 class OverallStandingsAPIView(ListCreateAPIView):
@@ -29,3 +30,19 @@ class MatchAPIView(ListCreateAPIView):
     ordering_fields = ['date_time']
     ordering = ['-date_time']
     search_fields = ['team1__name','team2__name','status','sport__name']
+
+
+class UpdatePoints(UpdateView):
+    model = Point
+    fields = ['hostel','points']
+    # template_name = 'spardha/update_points.html'
+
+    # def get_success_url(self):
+    #     return '/spardha/update_points/'
+
+    def get_queryset(self):
+        return Point.objects.all()
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

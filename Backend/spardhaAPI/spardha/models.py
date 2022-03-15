@@ -60,7 +60,7 @@ class Stage(models.Model):
 class Match(models.Model):
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     status = models.ForeignKey('Status', on_delete=models.CASCADE,null= True)
-    date_time = models.DateTimeField();
+    date_time = models.DateTimeField()
     team1 = models.ForeignKey("Hostel", related_name="team1", on_delete=models.CASCADE,null= True)
     team2 = models.ForeignKey("Hostel", related_name="team2", on_delete=models.CASCADE,null= True)
     stage = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
