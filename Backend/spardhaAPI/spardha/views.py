@@ -1,22 +1,23 @@
-from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK
-from .models import Sport
-from .serializers import SportSerializer
-# Create your views here.
-class StandingsAPIView(ListCreateAPIView):
-    serializer_class = SportSerializer
-    queryset = Sport.objects.all()
+from rest_framework import status,filters
+from django_filters.rest_framework import DjangoFilterBackend
+from .models import Hostel,Point
+from .serializers import HostelSerializer,StandingSerializer
 
-    #def get(self, request):
-    #   data = {"kameng":20}
-    #   return Response(data,status=HTTP_200_OK, content_type = 'application/json' )
-    def get(self, request):
-       data = {}
-       sports = Sport.objects.all()
-        
-       for sport in sports:
-        for hostel in sports.hostels:
-            return sport.standings
-       return Response(data,status=HTTP_200_OK, content_type = 'application/json' )
+# Create your views here.
+
+class OverallStandingsAPIView(ListCreateAPIView):
+    serializer_class = HostelSerializer
+    queryset = Hostel.objects.all().order_by('-overall_points')
+
+
+class StandingsAPIView(ListCreateAPIView):
+    serializer_class = StandingSerializer
+    queryset = Point.objects.all()
+    filterset_fields = ['sport']
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
+    ordering_fields = ['points']
+    ordering = ['-points']
+    search_fields = ['hostel__name']
+    

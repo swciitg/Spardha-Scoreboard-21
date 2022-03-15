@@ -71,21 +71,21 @@ class Match_all(models.Model):
     round = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
 
     def __str__(self):
-        return self.team1.name+" vs "+self.team2.name
+        return self.sport.name
 
 class Point(models.Model):
-    hostels = models.ForeignKey("Hostel",  on_delete=models.CASCADE,null= True)
+    hostel = models.ForeignKey("Hostel", related_name="hostels", on_delete=models.CASCADE,null= True)
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     points = models.IntegerField()
 
     def __str__(self):
-        return self.hostels.name
+        return self.hostel.name+" ( "+self.sport.name+" ) "
 
 class Score(models.Model):
-    hostels = models.ForeignKey("Hostel",  on_delete=models.CASCADE,null= True)
+    hostel = models.ForeignKey("Hostel", related_name="hostel", on_delete=models.CASCADE,null= True)
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     match = models.ForeignKey("Match_all",  on_delete=models.CASCADE,null= True)
     score = models.IntegerField()
 
     def __str__(self):
-        return self.hostels.name
+        return self.hostel.name

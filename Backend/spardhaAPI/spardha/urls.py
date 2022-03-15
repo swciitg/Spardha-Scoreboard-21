@@ -1,7 +1,7 @@
-from django.contrib import admin
 from django.urls import path,include
-from .views import StandingsAPIView
+from .views import OverallStandingsAPIView,StandingsAPIView
 
 urlpatterns = [
-    path('get-standings/', StandingsAPIView.as_view()),
+    path('standingsOverall/', OverallStandingsAPIView.as_view()),
+    path('standings/', StandingsAPIView.as_view()),
 ]
