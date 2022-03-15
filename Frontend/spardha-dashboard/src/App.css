@@ -5,6 +5,7 @@
 .bottom_navbar {
   display: flex;
   background-color: #2170e8;
+  font-family: "Titillium Web", sans-serif;
 }
 .nav_link {
   color: #ffffff;
@@ -26,4 +27,41 @@
 
 .fa_icon {
   padding: 0.4rem 1rem 0.4rem 1rem;
+}
+.standings_h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.115rem;
+}
+
+.standings_item {
+  display: flex;
+  flex-direction: row;
+  padding: 0.4rem 0 0.4rem 0;
+}
+
+.standings_item_circle {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  background-color: #c4c4c4;
+  margin-right: 0.5rem;
+}
+
+.standings_item_name {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 400;
+  color: #000000;
+  margin-right: 0.5rem;
+  flex: 1;
+}
+
+.standings_item_points {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 700;
+  color: #000000;
 }
