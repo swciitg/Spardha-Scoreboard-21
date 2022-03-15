@@ -37,6 +37,44 @@
   margin-bottom: 1rem;
   letter-spacing: 0.115rem;
 }
+.results_h2 {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.115rem;
+  margin-right: 10%;
+}
+
+.results_dropdown {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #000000;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.115rem;
+  border: none;
+  width: 50%;
+}
+
+.results_dropdown_date {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #000000;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.115rem;
+  border: none;
+  width: 100%;
+}
+.results_dropdown:focus {
+  outline: none;
+}
+
 
 .standings_item {
   display: flex;
