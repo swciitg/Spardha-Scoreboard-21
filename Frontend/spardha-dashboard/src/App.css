@@ -33,7 +33,7 @@
   font-size: 1rem;
   font-weight: 700;
   color: #000000;
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
   letter-spacing: 0.115rem;
 }
@@ -64,4 +64,43 @@
   font-family: "Red Hat Display", sans-serif;
   font-weight: 700;
   color: #000000;
+}
+
+.top_header {
+  padding: 0.4rem 0rem 0rem 0rem;
+  font-size: 0.6rem;
+}
+
+.top_header_logo {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.top_header_title {
+  letter-spacing: 0.115rem;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  color: #000000;
+}
+
+.standings_header {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  letter-spacing: 0.03rem;
+}
+
+.standings_dropdown_text {
+  font-weight: 300;
+  flex: 1;
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.black_line {
+  margin-top: -0.2rem;
+  background-color: #000000;
+  height: 1px;
 }
