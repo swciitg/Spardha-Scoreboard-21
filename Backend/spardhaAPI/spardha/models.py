@@ -16,30 +16,25 @@ class Format(models.Model):
     def __str__(self):
         return self.format
 
-class Points(models.Model):
-    hostel = models.ForeignKey("Hostel",  on_delete=models.CASCADE)
-    sport = models.ForeignKey("Sport",  on_delete=models.CASCADE)
-    points = models.IntegerField(default=0)
-
 class Sport(models.Model):
     name = models.CharField(max_length=100,null=True)
     hostels = models.ManyToManyField("Hostel")
     format = models.ForeignKey("Format",  on_delete=models.CASCADE,null= True)
-    final_points = models.JSONField(default=dict,null=True,blank=True)
+    # final_points = models.JSONField(default=dict,null=True,blank=True)
     # logo = models.ImageField(default="default.jpg", upload_to="logos")
 
     def __str__(self):
         return self.name
 
-class Sport_League(models.Model):
-    name = models.CharField(max_length=100,null=True)
-    hostels = models.ManyToManyField("Hostel")
-    format = models.ForeignKey("Format",  on_delete=models.CASCADE,null= True)
-    final_points = models.JSONField(default=dict,null=True,blank=True)
-    # logo = models.ImageField(default="default.jpg", upload_to="logos")
+# class Sport_League(models.Model):
+#     name = models.CharField(max_length=100,null=True)
+#     hostels = models.ManyToManyField("Hostel")
+#     format = models.ForeignKey("Format",  on_delete=models.CASCADE,null= True)
+#     # final_points = models.JSONField(default=dict,null=True,blank=True)
+#     # logo = models.ImageField(default="default.jpg", upload_to="logos")
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 class Status(models.Model):
     status = models.BooleanField(help_text="Enter 0 for upcoming and 1 for completed")
