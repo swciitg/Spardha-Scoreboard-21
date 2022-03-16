@@ -36,14 +36,14 @@ class Sport(models.Model):
 #     def __str__(self):
 #         return self.name
 
-class Status(models.Model):
-    status = models.BooleanField(help_text="Enter 0 for upcoming and 1 for completed")
+# class Status(models.Model):
+#     status = models.BooleanField(help_text="Enter 0 for upcoming and 1 for completed")
 
-    def __str__(self):
-        if(self.status):
-            return "True"
-        else:
-            return "False"
+#     def __str__(self):
+#         if(self.status):
+#             return "True"
+#         else:
+#             return "False"
 
 
 class Stage(models.Model):
@@ -54,7 +54,7 @@ class Stage(models.Model):
 
 class Match(models.Model):
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
-    status = models.ForeignKey('Status', on_delete=models.CASCADE,null= True)
+    status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
     date_time = models.DateTimeField()
     team1 = models.ForeignKey("Hostel", related_name="team1", on_delete=models.CASCADE,null= True)
     team2 = models.ForeignKey("Hostel", related_name="team2", on_delete=models.CASCADE,null= True)
@@ -67,7 +67,7 @@ class Match(models.Model):
 
 class Match_all(models.Model):
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
-    status = models.ForeignKey("Status",  on_delete=models.CASCADE,null= True)
+    status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
     date_time = models.DateTimeField()
     round = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
 
