@@ -7,5 +7,5 @@ urlpatterns = [
     path('standings/', StandingsAPIView.as_view()),
     path('matches/', MatchAPIView.as_view()),
 
-    path('<int:pk>/updatePoints/', UpdatePoints.as_view(),name='points-update'),
+    # path('<int:pk>/updatePoints/', UpdatePoints.as_view(),name='points-update'),
 ]

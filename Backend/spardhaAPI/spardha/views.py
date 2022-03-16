@@ -32,17 +32,17 @@ class MatchAPIView(ListCreateAPIView):
     search_fields = ['team1__name','team2__name','status','sport__name']
 
 
-class UpdatePoints(UpdateView):
-    model = Point
-    fields = ['hostel','points']
-    # template_name = 'spardha/update_points.html'
+# class UpdatePoints(UpdateView):
+#     model = Point
+#     fields = ['hostel','points']
+#     # template_name = 'spardha/update_points.html'
 
-    # def get_success_url(self):
-    #     return '/spardha/update_points/'
+#     # def get_success_url(self):
+#     #     return '/spardha/update_points/'
 
-    def get_queryset(self):
-        return Point.objects.all()
+#     def get_queryset(self):
+#         return Point.objects.all()
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)
