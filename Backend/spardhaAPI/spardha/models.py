@@ -26,26 +26,6 @@ class Sport(models.Model):
     def __str__(self):
         return self.name
 
-# class Sport_League(models.Model):
-#     name = models.CharField(max_length=100,null=True)
-#     hostels = models.ManyToManyField("Hostel")
-#     format = models.ForeignKey("Format",  on_delete=models.CASCADE,null= True)
-#     # final_points = models.JSONField(default=dict,null=True,blank=True)
-#     # logo = models.ImageField(default="default.jpg", upload_to="logos")
-
-#     def __str__(self):
-#         return self.name
-
-# class Status(models.Model):
-#     status = models.BooleanField(help_text="Enter 0 for upcoming and 1 for completed")
-
-#     def __str__(self):
-#         if(self.status):
-#             return "True"
-#         else:
-#             return "False"
-
-
 class Stage(models.Model):
     stage = models.CharField(max_length=100)
 
@@ -80,7 +60,7 @@ class Point(models.Model):
     points = models.IntegerField()
 
     def __str__(self):
-        return self.hostel.name+" ( "+self.sport.name+" ) "
+        return self.sport.name+" ( "+self.hostel.name+" ) "
 
 class Score(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostel", on_delete=models.CASCADE,null= True)
@@ -89,4 +69,4 @@ class Score(models.Model):
     score = models.IntegerField()
 
     def __str__(self):
-        return self.hostel.name
+        return self.sport.name+" ( "+self.hostel.name+" ) "
