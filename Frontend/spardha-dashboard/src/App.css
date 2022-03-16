@@ -75,7 +75,6 @@
   outline: none;
 }
 
-
 .standings_item {
   display: flex;
   flex-direction: row;
@@ -130,9 +129,14 @@
   letter-spacing: 0.03rem;
 }
 
+.standings_dropdown {
+  flex: 1;
+  border: none;
+}
+
 .standings_dropdown_text {
   font-weight: 300;
-  flex: 1;
+
   text-align: right;
   padding-right: 0.5rem;
 }

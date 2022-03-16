@@ -20,15 +20,49 @@ const data = [{
   },{
     name: "Disang",
     points: 400,
-  },]
+  },];
+
+  const sport = [
+    {
+      name: 'Cricket',
+    },
+    {
+      name: 'Basketball',
+    },
+    {
+      name: 'Volleyball',
+    },
+    {
+      name: 'Badminton',
+    },
+    {
+      name: 'Football',
+    },
+    {
+      name: 'Hockey',
+    },
+    {
+      name: 'Chess',
+    },
+    {
+      name: 'Squash',
+    },
+  ];
+  
 
 const Standings = (props) => {
 return (
     <div className="p-4">
         <div className="standings_header d-flex flex-row align-items-center">
             <div className="standings_text">STANDINGS</div>
-            <div className="standings_dropdown_text">Overall</div>
-            <FontAwesomeIcon icon={faCaretDown} className="standings_dropdown_icon" size="l"/>
+            <select className="standings_dropdown" name='' id=''>
+                <option className="standings_dropdown_text">Overall</option>
+                {sport.map((hostel, i) => (
+                  <option value={i} className="standings_dropdown_text">{hostel.name}</option>
+                ))}
+            </select>
+           {/*  <div className="standings_dropdown_text">Overall</div>
+            <FontAwesomeIcon icon={faCaretDown} className="standings_dropdown_icon" size="l"/> */}
         </div>
         <div className="w-100 black_line" />
         <div className="standings_h2">
