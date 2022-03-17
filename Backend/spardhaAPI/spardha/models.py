@@ -20,8 +20,6 @@ class Sport(models.Model):
     name = models.CharField(max_length=100,null=True)
     hostels = models.ManyToManyField("Hostel")
     format = models.ForeignKey("Format",  on_delete=models.CASCADE,null= True)
-    # final_points = models.JSONField(default=dict,null=True,blank=True)
-    # logo = models.ImageField(default="default.jpg", upload_to="logos")
 
     def __str__(self):
         return self.name
@@ -42,7 +40,8 @@ class Match(models.Model):
     score1 = models.IntegerField(null=True,blank=True)
     score2 = models.IntegerField(null=True,blank=True)
 
-    def __str__(self):
+    @property
+    def name(self):
         return self.team1.name+" vs "+self.team2.name
 
 class Match_all(models.Model):
@@ -51,6 +50,9 @@ class Match_all(models.Model):
     date_time = models.DateTimeField()
     round = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
 
+    @property
+    def name(self):
+        return self.sport.name + " - " + self.round.stage
     def __str__(self):
         return self.sport.name
 
@@ -58,6 +60,9 @@ class Point(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostels", on_delete=models.CASCADE,null= True)
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     points = models.IntegerField()
+
+    class Meta:
+        unique_together = ('hostel', 'sport',)
 
     def __str__(self):
         return self.sport.name+" ( "+self.hostel.name+" ) "

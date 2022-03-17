@@ -4,8 +4,8 @@ from .models import *
 # Register your models here.
 
 class HostelAdmin(admin.ModelAdmin):
-    list_display = ['name']
-    ordering = ['name']
+    list_display = ['name','overall_points']
+    ordering = ['overall_points']
 
 class SportAdmin(admin.ModelAdmin):
     list_display = ['name','format']
@@ -24,15 +24,18 @@ class ScoreAdmin(admin.ModelAdmin):
     ordering = ['sport']
 
 class PointAdmin(admin.ModelAdmin):
-    list_display = ['sport','hostel']
-    ordering = ['sport']
+    list_display = ['sport','hostel','points']
+    list_filter = ['sport','hostel']
+    ordering = ['sport','-points']
 
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ['team1','team2','date_time','status']
+    list_display = ['name','sport','stage','date_time','status']
+    list_filter = ['status','sport','stage','team1','team2',]
     ordering = ['date_time']
 
 class MatchAllAdmin(admin.ModelAdmin):
     list_display = ['sport','date_time','status']
+    list_filter = ['status','sport','round']
     ordering = ['date_time']
 
 admin.site.register(Hostel,HostelAdmin)
