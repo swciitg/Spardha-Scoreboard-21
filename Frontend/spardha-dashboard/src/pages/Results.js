@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -58,7 +58,16 @@ const sport = [
 
 
 const Results = (props) => {
+  const baseApiURL = 'http://localhost:8000/spardhaApi/hostels/';
+  const [apiURL, setApiURL] = useState(baseApiURL);
+  const [hostels, setHostels] = useState([]);
   const [date, setDate] = useState(new Date());
+  const [sportName, setSportName] = useState([]);
+  useEffect(() => {
+    axios.get(apiURL).then((response) =>{
+      console.log(response.data);
+    })
+  }, [apiURL]);
 
   return (
     <div className='p-4'>
@@ -84,9 +93,10 @@ const Results = (props) => {
             ))}
           </select>
           <select className='results_dropdown w-2' name='' id=''>
+
             <option hidden>HOSTEL</option>
-            {hostel.map((hostel, i) => (
-              <option value={i}>{hostel.name}</option>
+            {hostels.map((hostel, i) => (
+              <option value={i}>{i}</option>
             ))}
           </select>
         </div>
