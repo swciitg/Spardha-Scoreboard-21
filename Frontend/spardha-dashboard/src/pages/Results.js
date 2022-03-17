@@ -5,64 +5,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const hostel = [
-  {
-    name: 'BRAHMAPUTRA',
-  },
-  {
-    name: 'LOHIT',
-  },
-  {
-    name: 'SIANG',
-  },
-  {
-    name: 'MANAS',
-  },
-  {
-    name: 'KAPILI',
-  },
-  {
-    name: 'DISANG',
-  },
-];
-const sport = [
-  {
-    name: 'CRICKET',
-  },
-  {
-    name: 'BASKETBALL',
-  },
-  {
-    name: 'BASKETBALL',
-  },
-  {
-    name: 'VOLLEYBALL',
-  },
-  {
-    name: 'BADMINTON',
-  },
-  {
-    name: 'FOOTBALL',
-  },
-  {
-    name: 'HOCKEY',
-  },
-  {
-    name: 'CHESS',
-  },
-  {
-    name: 'SQUASH',
-  },
-];
-
-
 
 const Results = (props) => {
+  const [date, setDate] = useState(new Date());
   const baseApiURL = 'http://localhost:8000/spardhaApi/';
   const [hostelApiURL, setHostelApiURL] = useState(baseApiURL+'hostels/');
   const [sportApiURL, setSportApiURL]  = useState(baseApiURL+'sports/');
   const [hostels, setHostels] = useState([]);
-  const [date, setDate] = useState(new Date());
   const [sports, setSports] = useState([]);
   useEffect(() => {
     axios.get(hostelApiURL).then((response) =>{
@@ -96,7 +45,7 @@ const Results = (props) => {
           </div>
           <select className='results_dropdown w-2' name='' id=''>
             <option hidden>SPORT</option>
-            {sport.map((sport, i) => (
+            {sports.map((sport, i) => (
               <option value={i}>{sport.name}</option>
             ))}
           </select>
