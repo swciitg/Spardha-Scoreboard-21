@@ -11,8 +11,16 @@ const Results = (props) => {
   const baseApiURL = 'http://localhost:8000/spardhaApi/';
   const [hostelApiURL, setHostelApiURL] = useState(baseApiURL+'hostels/');
   const [sportApiURL, setSportApiURL]  = useState(baseApiURL+'sports/');
+  const [resultsApiURL, setResultsApiURL] = useState(baseApiURL+'results/');
   const [hostels, setHostels] = useState([]);
   const [sports, setSports] = useState([]);
+  const [results, setResults] = useState([]);
+  const [selectedHostel, setSelectedHostel] = useState('');
+  const [selectedSport, setSelectedSport] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedResults, setSelectedResults] = useState([]);
+
+
   useEffect(() => {
     axios.get(hostelApiURL).then((response) =>{
       console.log(response.data);
@@ -25,6 +33,13 @@ const Results = (props) => {
       setSports(response.data);
     })
   }, [sportApiURL]);
+  useEffect(() => {
+    axios.get(resultsApiURL).then((response) =>{
+      console.log(response.data);
+      setResults(response.data);
+    })
+  }, [resultsApiURL]);
+
 
   return (
     <div className='p-4'>
