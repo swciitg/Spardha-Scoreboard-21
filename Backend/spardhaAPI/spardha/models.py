@@ -46,6 +46,7 @@ class Match(models.Model):
 
 class Match_all(models.Model):
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
+    hostels = models.ManyToManyField("Hostel")
     status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
     date_time = models.DateTimeField()
     round = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
@@ -54,7 +55,7 @@ class Match_all(models.Model):
     def name(self):
         return self.sport.name + " - " + self.round.stage
     def __str__(self):
-        return self.sport.name
+        return self.sport.name + " - " + self.round.stage
 
 class Point(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostels", on_delete=models.CASCADE,null= True)
@@ -69,7 +70,6 @@ class Point(models.Model):
 
 class Score(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostel", on_delete=models.CASCADE,null= True)
-    sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     match = models.ForeignKey("Match_all",  on_delete=models.CASCADE,null= True)
     score = models.IntegerField()
 
