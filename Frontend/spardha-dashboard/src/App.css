@@ -82,6 +82,8 @@
 }
 
 .standings_item_circle {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
   height: 1.5rem;
   width: 1.5rem;
   border-radius: 50%;
@@ -145,4 +147,19 @@
   margin-top: -0.2rem;
   background-color: #000000;
   height: 1px;
+}
+
+.gold_circle {
+  background-color: #ffb931;
+  text-align: center;
+}
+
+.silver_circle {
+  background-color: #aab1bf;
+  text-align: center;
+}
+
+.bronze_circle {
+  background-color: #d49337;
+  text-align: center;
 }
