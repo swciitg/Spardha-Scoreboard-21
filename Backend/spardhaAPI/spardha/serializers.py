@@ -31,5 +31,7 @@ class MatchSerializer(serializers.ModelSerializer):
         model = Match
         fields = ['team1','team2','sport','date_time','status','stage','score1','score2']
 
-        
-        
+class MatchAllSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Match
+        fields = ['name','sport','hostels','date_time','status','round']
