@@ -32,4 +32,9 @@ class MatchSerializer(serializers.ModelSerializer):
         fields = ['team1','team2','sport','date_time','status','stage']
 
         
+class MatchAllSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Match
+        fields = ['name','sport','hostels','date_time','status','round']
+
         
