@@ -5,7 +5,10 @@
 .bottom_navbar {
   display: flex;
   background-color: #2170e8;
-  font-family: "Titillium Web", sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding-bottom: 0.2rem;
 }
 .nav_link {
   color: #ffffff;
@@ -83,9 +86,9 @@
 
 .standings_item_circle {
   font-family: "Raleway", sans-serif;
-  font-weight: 400;
-  height: 1.5rem;
-  width: 1.5rem;
+  font-weight: 700;
+  height: 1.6rem;
+  width: 1.6rem;
   border-radius: 50%;
   background-color: #e2e2e2;
   margin-right: 0.5rem;
@@ -132,6 +135,25 @@
   letter-spacing: 0.03rem;
 }
 
+.results_header {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  letter-spacing: 0.03rem;
+  width: 100%;
+  text-align: center;
+  border-top: 0.5px solid #e9e9eb;
+  border-bottom: 0.5px solid #e9e9eb;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.results_text {
+  width: 100%;
+  text-align: center;
+}
+
 .standings_dropdown {
   flex: 1;
   border: none;
@@ -155,17 +177,17 @@
 }
 
 .gold_circle {
-  background-color: #ffb931;
+  background-color: #ffd584;
   text-align: center;
 }
 
 .silver_circle {
-  background-color: #aab1bf;
+  background-color: #c6d0e5;
   text-align: center;
 }
 
 .bronze_circle {
-  background-color: #d49337;
+  background-color: #f4ba9a;
   text-align: center;
 }
 
@@ -193,7 +215,7 @@
 .result_date {
   font-weight: 600;
   color: #3a3e44;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .vertical_line {
