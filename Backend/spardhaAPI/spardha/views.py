@@ -28,18 +28,8 @@ class MatchAPIView(ListCreateAPIView):
     ordering = ['-date_time']
     search_fields = ['team1__name','team2__name','sport__name']
 
-class MatchAPIView(ListCreateAPIView):
-    serializer_class = MatchSerializer
-    queryset = Match.objects.all()
-    filterset_fields = ['id','status','team1','team2','sport','date_time']
-    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
-    ordering_fields = ['date_time']
-    ordering = ['-date_time']
-    search_fields = ['team1__name','team2__name','sport__name']
-
-
 class MatchAllAPIView(ListCreateAPIView):
-    serializer_class = MatchSerializer
+    serializer_class = MatchAllSerializer
     queryset = Match_all.objects.all()
     filterset_fields = ['id','status','hostels','sport','date_time']
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
