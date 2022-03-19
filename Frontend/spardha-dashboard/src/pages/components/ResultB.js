@@ -32,7 +32,7 @@ return (
                 <div className="result_sport">{props.Sport}</div>
                 <div className="result_sport_detail">{props.Sport}</div>
             </div>
-            <div><span className="result_date">5 Mar</span> <span className="vertical_line">|</span> <span className="result_date">9:00pm</span></div>
+            <div><span className="result_date">5 Mar</span> <span className="vertical_line">|</span> <span className="result_date">9:00 pm</span></div>
         </div>
         <div className="result_details">
             {
@@ -43,7 +43,7 @@ return (
         </div>
         <div className="d-flex flex-row justify-content-between mt-1">
             <div className="result_stage">Group Stage</div>
-            <div className="result_final_text">Kameng won</div>
+            <div className="result_final_text">{data[0].name} won</div>
         </div>
 
         
