@@ -48,6 +48,7 @@ const Results = (props) => {
         .then((response) => {
           console.log(response.data);
           setMatches(response.data.data);
+          setLoading(false);
         });
   }, [matchesApiURL, selectedHostel, selectedSport]);
 
@@ -57,7 +58,6 @@ const Results = (props) => {
   const handleSportChange = (e) => {
     setSelectedSport(e.target.value);
   };
-
 
   return (
     <div className='p-4 results'>
@@ -92,8 +92,9 @@ const Results = (props) => {
       {loading ? (
         <p>Loading...</p>
       ) : (matches.map((match, i) => (
+        
         match.type === 'all' ? 
-          <ResultB {...match}/> : <ResultA {...match}/>
+          match.status === true && <ResultB {...match}/> : match.status === true && <ResultA {...match}/>
       ))
       )} 
     </div>

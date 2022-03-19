@@ -5,14 +5,13 @@ const ResultB = (props) => {
 
     console.log(props.scores);
 
-
-      var standings = [];
-      var i = 0;
-      for (const key in props.scores) {
-          console.log(`${key}: ${props.scores[key]}`);
-          standings.push(<StandingsItem Name={key} Points={props.scores[key]} Index={i} />)
-          i++;
-      }
+    var standings = [];
+    var i = 0;
+    for (const key in props.scores) {
+        console.log(`${key}: ${props.scores[key]}`);
+        standings.push(<StandingsItem Name={key} Points={props.scores[key]} Index={i} />)
+        i++;
+    }
 
     return (
         <div className="result_A">
@@ -30,8 +29,6 @@ const ResultB = (props) => {
                 <div className="result_stage">Group Stage</div>
                 <div className="result_final_text">{Object.keys(props.scores)[0]} won</div>
             </div>
-
-            
         </div>
     )
 };
