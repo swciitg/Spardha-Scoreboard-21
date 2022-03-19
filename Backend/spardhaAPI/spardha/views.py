@@ -22,30 +22,30 @@ class MatchList(ListAPIView):
         hostel = self.request.query_params.get('hostel')
         sport = self.request.query_params.get('sport')
         def sorthelper(e):
-            return e["date_time"]
+            return e["date"]+"Z"+e["time"]
         # try:
         match1v1=[]
         matchall = []
         match_list = []
-
         if hostel is None and sport is None:
             match1v1 = Match.objects.all()
             matchall = Match_all.objects.all()
-            print(matchall[0].hostels)
+            # print(h in matchall[0].hostels.all())
         elif sport is None:
+            h = Hostel.objects.get(id=hostel)
             match1v1 = Match.objects.all().filter(Q(team1=hostel) | Q(team2=hostel))
-            matchall = Match_all.objects.all().filter(hostels__contains=hostel)
+            matchall = [match for match in Match_all.objects.all() if h in match.hostels.all()]
         elif hostel is None:
             match1v1 = Match.objects.all().filter(sport=sport)
             matchall = Match_all.objects.all().filter(sport=sport)
         else:
             match1v1 = Match.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
-            matchall = Match_all.objects.all().filter(sport=sport).filter(hostels__contains=hostel)
+            matchall = [match for match in Match_all.objects.all().filter(sport=sport) if h in match.hostels.all()]
         
         for match in match1v1:
-                match_data = MatchSerializer(match).data
-                match_data["type"] = "1v1"
-                match_list.append(match_data)
+            match_data = MatchSerializer(match).data
+            match_data["type"] = "1v1"
+            match_list.append(match_data)
             
         for match in matchall:
             match_data = MatchAllSerializer(match).data
@@ -69,29 +69,20 @@ class StandingsAPIView(ListCreateAPIView):
 class MatchAPIView(ListCreateAPIView):
     serializer_class = MatchSerializer
     queryset = Match.objects.all()
-    filterset_fields = ['team1','team2','sport','date_time']
+    filterset_fields = ['id','status','team1','team2','sport','date']
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
-    ordering_fields = ['date_time']
-    ordering = ['-date_time']
-    search_fields = ['team1__name','team2__name','sport__name']
-
-class MatchAPIView(ListCreateAPIView):
-    serializer_class = MatchSerializer
-    queryset = Match.objects.all()
-    filterset_fields = ['id','status','team1','team2','sport','date_time']
-    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
-    ordering_fields = ['date_time']
-    ordering = ['-date_time']
+    ordering_fields = ['date']
+    ordering = ['-date']
     search_fields = ['team1__name','team2__name','sport__name']
 
 
 class MatchAllAPIView(ListCreateAPIView):
-    serializer_class = MatchSerializer
+    serializer_class = MatchAllSerializer
     queryset = Match_all.objects.all()
-    filterset_fields = ['id','status','hostels','sport','date_time']
+    filterset_fields = ['id','status','hostels','sport','date']
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
-    ordering_fields = ['date_time']
-    ordering = ['-date_time']
+    ordering_fields = ['date']
+    ordering = ['-date']
     search_fields = ['team1__name','team2__name','sport__name']
 
 

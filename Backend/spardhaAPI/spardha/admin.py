@@ -31,9 +31,9 @@ class PointAdmin(admin.ModelAdmin):
     ordering = ['sport','-points']
 
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ['name','sport','stage','date_time','status']
+    list_display = ['name','sport','stage','date','time','status']
     list_filter = ['status','sport','stage','team1','team2',]
-    ordering = ['date_time']
+    ordering = ['date']
 
 # class MatchAllForm(forms.ModelForm):
 #     first_name = forms.CharField()
@@ -61,9 +61,9 @@ class MatchAdmin(admin.ModelAdmin):
 
 
 class MatchAllAdmin(admin.ModelAdmin):
-    list_display = ['sport','round', 'date_time','status']
+    list_display = ['sport','round', 'date','time','status']
     list_filter = ['status','sport','round']
-    ordering = ['date_time']
+    ordering = ['date']
     # form = MatchAllForm
 
 admin.site.register(Hostel,HostelAdmin)

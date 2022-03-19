@@ -29,12 +29,15 @@ class MatchSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Match
-        fields = ['team1','team2','sport','date_time','status','stage']
+        fields = ['team1','team2','sport','date','time','status','score1','score2','stage']
 
         
 class MatchAllSerializer(serializers.ModelSerializer):
+    sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
+    round = serializers.SlugRelatedField(read_only=True,slug_field='stage')
+
     class Meta:
         model = Match_all
-        fields = ['name','sport','hostels','date_time','status','round']
+        fields = ['name','sport','hostels','date','time','status','round']
 
         
