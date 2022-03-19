@@ -15,8 +15,8 @@ const Results = (props) => {
   const [sports, setSports] = useState([]);
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedHostel, setSelectedHostel] = useState('-1');
-  const [selectedSport, setSelectedSport] = useState('-1');
+  const [selectedHostel, setSelectedHostel] = useState('');
+  const [selectedSport, setSelectedSport] = useState('');
   // const [selectedDate, setSelectedDate] = useState('-1');
 
   useEffect(() => {
@@ -42,12 +42,7 @@ const Results = (props) => {
     setLoading(true);
     console.log(selectedHostel);
     console.log(selectedSport);
-    if (
-      selectedHostel !== '-1'  &&
-      selectedSport !== '-1'
-    ) {
-      axios
-        .get(
+    axios.get(
           matchesApiURL +
             '?team1=' +
             selectedHostel +
@@ -58,21 +53,30 @@ const Results = (props) => {
         )
         .then((response) => {
           console.log(response.data);
-          setMatches(response.data);
+          let matches1 = response.data;
+          axios.get(
+            matchesApiURL +
+              '?team1=' +
+              '' +
+              '&team2=' +
+              selectedHostel +
+              '&sport=' +
+              selectedSport
+          ).then((response)=>{
+            matches1 = matches1.concat(response.data);
+            console.log("all matches are here");
+            console.log(matches1);
+            setMatches(matches1);
+            setLoading(false);
+          })
           
-          setLoading(false);
         });
-    }
-    setLoading(false);
   }, [matchesApiURL, selectedHostel, selectedSport]);
 
-  const hostel1handleChange = (e) => {
+  const handleHostelChange = (e) => {
     setSelectedHostel(e.target.value);
   };
-  const hostel2handleChange = (e) => {
-    setSelectedHostel(e.target.value);
-  };
-  const sporthandleChange = (e) => {
+  const handleSportChange = (e) => {
     setSelectedSport(e.target.value);
   };
 
@@ -94,31 +98,33 @@ const Results = (props) => {
               onChange={(date) => setDate(date)}
             />
           </div> */}
-          <select className='results_dropdown w-2' name='' id=''>
-            <option hidden>SPORT</option>
+          <select onChange={handleSportChange} className='results_dropdown w-2' name='' id=''>
+            <option value=''>SPORT</option>
             {sports.map((sport, i) => (
-              <option value={i}>{sport.name}</option>
+              <option value={sport.id}>{sport.name}</option>
             ))}
           </select>
-          <select className='results_dropdown w-2' name='' id=''>
-            <option hidden>HOSTEL</option>
+          <select onChange={handleHostelChange} className='results_dropdown w-2' name='' id=''>
+            <option value=''>HOSTEL</option>
             {hostels.map((hostel, i) => (
-              <option value={i}>{hostel.name}</option>
+              <option value={hostel.id}>{hostel.name}</option>
             ))}
           </select>
         </div>
       </div>
       {loading ? (
         <p>Loading...</p>
-      ) : (
+      ) : (matches.map((match, i) => (
         <ResultA
-          Team1={selectedHostel.name}
-          Team2={selectedHostel.name}
-          Sport={selectedSport.name}
-          Stage={1}
-          Status={false}
-          Date_time='2022-03-19T04:25:52Z'
+          Team1={match.team1}
+          Team2={match.team2}
+          Sport={match.sport}
+          Stage={match.stage}
+          Status={match.status}
+          Date_time={match.datetime}
         />
+      ))
+        
       )}
       
       <ResultB Sport = 'Basketball' Stage = {1} Status = {false} Date_time = '2022-03-19T04:25:52Z'/>
