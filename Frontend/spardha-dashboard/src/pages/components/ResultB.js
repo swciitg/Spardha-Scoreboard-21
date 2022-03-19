@@ -36,7 +36,7 @@ return (
         <div className="result_details">
             {
                 data.map((item, index) => (
-                        <div className="d-flex flex-row justify-content-between align-items-center">
+                        <div className="d-flex flex-row justify-content-between align-items-center pt-1 pb-1">
                             <div className="d-flex flex-row">
                                 <div className="standings_item_circle"></div>
                                 <div className="standings_item_name">{item.name}</div>
@@ -44,10 +44,9 @@ return (
                             <div className="result_score_winner">{item.points}</div>
                         </div>
                     ))
-                
             }
         </div>
-        <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-between mt-1">
             <div className="result_stage">Group Stage</div>
             <div className="result_final_text">Kameng won</div>
         </div>

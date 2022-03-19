@@ -78,7 +78,7 @@
 .standings_item {
   display: flex;
   flex-direction: row;
-  padding: 0.4rem 0 0.4rem 0;
+  padding: 0.2rem 0 0.2rem 0;
 }
 
 .standings_item_circle {
@@ -173,14 +173,14 @@
 }
 
 .result_A {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   font-family: "Red Hat Display", sans-serif;
-  border: 1px solid #000000;
   border-radius: 10px;
   margin-bottom: 1rem;
+  box-shadow: 0px 0px 15px #57607144;
 }
 
 .result_sport {
@@ -211,25 +211,32 @@
 }
 
 .result_score_winner {
-  font-weight: 500;
+  font-weight: 700;
   color: #323439;
   font-size: 1.2rem;
 }
 
 .result_score_loser {
-  font-weight: 500;
+  font-weight: 700;
   color: #cad1e2;
   font-size: 1.2rem;
+  margin-right: 1rem;
 }
 
 .result_stage {
   background-color: #00c51f33;
-  padding: 0.3rem;
+  padding: 0.3rem 0.6rem 0.3rem 0.6rem;
   font-weight: 500;
+  border-radius: 5px;
 }
 
 .result_sport_detail {
   font-weight: 500;
   color: #7a8088;
   font-size: 0.9rem;
+}
+
+.result_list_item {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
 }

@@ -83,7 +83,7 @@ const Results = (props) => {
         <div className='standings_text'>RESULTS</div>
       </div>
       <div className='w-100 black_line' />
-      <div className='d-flex flex-row align-items-center justify-content-between'>
+      <div className='d-flex flex-row align-items-center justify-content-between mb-2'>
         <div className='results_h2'>FILTERS</div>
         <div className='d-flex flex-row align-items-center'>
           {/* <div>
