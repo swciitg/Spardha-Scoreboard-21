@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ResultA from './components/ResultA';
 
 const Results = (props) => {
   const [date, setDate] = useState(new Date());
@@ -98,6 +97,7 @@ const Results = (props) => {
           </select>
         </div>
       </div>
+      <ResultA Team1 = 'Lohit' Team2 = 'Barak' Sport = 'Basketball' Stage = {1} Status = {false} Date_time = '2022-03-19T04:25:52Z'/>
     </div>
   );
 };
