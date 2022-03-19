@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ResultA from './components/ResultA';
 import ResultB from './components/ResultB';
 
 const Results = (props) => {
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
   const baseApiURL = 'https://swc.iitg.ac.in/spardhaApi/';
   const [hostelApiURL, setHostelApiURL] = useState(baseApiURL + 'hostels/');
   const [sportApiURL, setSportApiURL] = useState(baseApiURL + 'sports/');
@@ -17,7 +17,7 @@ const Results = (props) => {
   const [loading, setLoading] = useState(false);
   const [selectedHostel, setSelectedHostel] = useState('-1');
   const [selectedSport, setSelectedSport] = useState('-1');
-  const [selectedDate, setSelectedDate] = useState('-1');
+  // const [selectedDate, setSelectedDate] = useState('-1');
 
   useEffect(() => {
     setLoading(true);
@@ -36,15 +36,14 @@ const Results = (props) => {
       setLoading(false);
     });
   }, [sportApiURL]);
+
   useEffect(() => {
     console.log('triggered');
     setLoading(true);
-    console.log(selectedHostel1);
-    console.log(selectedHostel2);
+    console.log(selectedHostel);
     console.log(selectedSport);
     if (
-      selectedHostel1 !== '-1' &&
-      selectedHostel2 !== '-1' &&
+      selectedHostel !== '-1'  &&
       selectedSport !== '-1'
     ) {
       axios
@@ -65,13 +64,13 @@ const Results = (props) => {
         });
     }
     setLoading(false);
-  }, [matchesApiURL, selectedHostel1, selectedHostel2, selectedSport]);
+  }, [matchesApiURL, selectedHostel, selectedSport]);
 
   const hostel1handleChange = (e) => {
-    setSelectedHostel1(e.target.value);
+    setSelectedHostel(e.target.value);
   };
   const hostel2handleChange = (e) => {
-    setSelectedHostel2(e.target.value);
+    setSelectedHostel(e.target.value);
   };
   const sporthandleChange = (e) => {
     setSelectedSport(e.target.value);
@@ -113,8 +112,8 @@ const Results = (props) => {
         <p>Loading...</p>
       ) : (
         <ResultA
-          Team1={selectedHostel1.name}
-          Team2={selectedHostel2.name}
+          Team1={selectedHostel.name}
+          Team2={selectedHostel.name}
           Sport={selectedSport.name}
           Stage={1}
           Status={false}
