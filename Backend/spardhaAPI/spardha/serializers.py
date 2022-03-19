@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Hostel, Point, Match,Sport
+from .models import Hostel, Point, Match,Sport,Match_all
 
 class HostelSerializer(serializers.ModelSerializer):
     
@@ -29,12 +29,15 @@ class MatchSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Match
-        fields = ['team1','team2','sport','date_time','status','stage']
+        fields = ['team1','team2','sport','date','time','status','stage']
 
         
 class MatchAllSerializer(serializers.ModelSerializer):
+    sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
+    round = serializers.SlugRelatedField(read_only=True,slug_field='stage')
+
     class Meta:
-        model = Match
-        fields = ['name','sport','hostels','date_time','status','round']
+        model = Match_all
+        fields = ['sport','hostels','date','time','status','round']
 
         
