@@ -33,7 +33,8 @@ class Stage(models.Model):
 class Match(models.Model):
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
-    date_time = models.DateTimeField()
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
     team1 = models.ForeignKey("Hostel", related_name="team1", on_delete=models.CASCADE,null= True)
     team2 = models.ForeignKey("Hostel", related_name="team2", on_delete=models.CASCADE,null= True)
     stage = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
@@ -48,7 +49,8 @@ class Match_all(models.Model):
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     hostels = models.ManyToManyField("Hostel")
     status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
-    date_time = models.DateTimeField()
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
     round = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
 
     @property

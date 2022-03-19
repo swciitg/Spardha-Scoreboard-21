@@ -8,7 +8,7 @@ return (
     <div className="result_A">
         <div className="d-flex flex-row justify-content-between">
             <div className="result_sport"><span>{props.Sport}</span> <span>5v5</span></div>
-            <div><span className="result_date">5 Mar</span> <span className="vertical_line">|</span> <span className="result_date">9:00pm</span></div>
+            <div><span className="result_date">5 Mar</span> <span className="vertical_line">|</span> <span className="result_date">9:00 pm</span></div>
         </div>
         <div className="result_details">
             <div className="d-flex flex-row justify-content-between result_list_item">
@@ -31,8 +31,8 @@ return (
             </div>
         </div>
         <div className="d-flex flex-row justify-content-between">
-            <div className="result_stage">Group Stage</div>
-            <div className="result_final_text">Kameng won</div>
+            <div className="result_stage">Stage {props.Stage}</div>
+            <div className="result_final_text">{props.Team1} won</div>
         </div>
 
         
