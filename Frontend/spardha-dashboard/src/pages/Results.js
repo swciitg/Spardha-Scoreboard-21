@@ -14,8 +14,7 @@ const Results = (props) => {
   const [sports, setSports] = useState([]);
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedHostel1, setSelectedHostel1] = useState('-1');
-  const [selectedHostel2, setSelectedHostel2] = useState('-1');
+  const [selectedHostel, setSelectedHostel] = useState('-1');
   const [selectedSport, setSelectedSport] = useState('-1');
   const [selectedDate, setSelectedDate] = useState('-1');
 
@@ -51,20 +50,32 @@ const Results = (props) => {
         .get(
           matchesApiURL +
             '?team1=' +
-            selectedHostel1 +
+            selectedHostel +
             '&team2=' +
-            selectedHostel2 +
+            '' +
             '&sport=' +
             selectedSport
         )
         .then((response) => {
           console.log(response.data);
           setMatches(response.data);
+          
           setLoading(false);
         });
     }
     setLoading(false);
   }, [matchesApiURL, selectedHostel1, selectedHostel2, selectedSport]);
+
+  const hostel1handleChange = (e) => {
+    setSelectedHostel1(e.target.value);
+  };
+  const hostel2handleChange = (e) => {
+    setSelectedHostel2(e.target.value);
+  };
+  const sporthandleChange = (e) => {
+    setSelectedSport(e.target.value);
+  };
+
 
   return (
     <div className='p-4'>
@@ -75,14 +86,14 @@ const Results = (props) => {
       <div className='d-flex flex-row align-items-center justify-content-between'>
         <div className='results_h2'>FILTERS</div>
         <div className='d-flex flex-row align-items-center'>
-          <div>
+          {/* <div>
             <DatePicker
               className='results_dropdown_date'
               placeholderText='DATE'
               selected={date}
               onChange={(date) => setDate(date)}
             />
-          </div>
+          </div> */}
           <select className='results_dropdown w-2' name='' id=''>
             <option hidden>SPORT</option>
             {sports.map((sport, i) => (
@@ -97,7 +108,18 @@ const Results = (props) => {
           </select>
         </div>
       </div>
-      <ResultA Team1 = 'Lohit' Team2 = 'Barak' Sport = 'Basketball' Stage = {1} Status = {false} Date_time = '2022-03-19T04:25:52Z'/>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ResultA
+          Team1={selectedHostel1.name}
+          Team2={selectedHostel2.name}
+          Sport={selectedSport.name}
+          Stage={1}
+          Status={false}
+          Date_time='2022-03-19T04:25:52Z'
+        />
+      )}
     </div>
   );
 };
