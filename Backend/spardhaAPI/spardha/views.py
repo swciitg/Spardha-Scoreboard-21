@@ -23,39 +23,39 @@ class MatchList(ListAPIView):
         sport = self.request.query_params.get('sport')
         def sorthelper(e):
             return e["date"]+"Z"+e["time"]
-        # try:
-        match1v1=[]
-        matchall = []
-        match_list = []
-        if hostel is None and sport is None:
-            match1v1 = Match.objects.all()
-            matchall = Match_all.objects.all()
-            # print(h in matchall[0].hostels.all())
-        elif sport is None:
-            h = Hostel.objects.get(id=hostel)
-            match1v1 = Match.objects.all().filter(Q(team1=hostel) | Q(team2=hostel))
-            matchall = [match for match in Match_all.objects.all() if h in match.hostels.all()]
-        elif hostel is None:
-            match1v1 = Match.objects.all().filter(sport=sport)
-            matchall = Match_all.objects.all().filter(sport=sport)
-        else:
-            match1v1 = Match.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
-            matchall = [match for match in Match_all.objects.all().filter(sport=sport) if h in match.hostels.all()]
-        
-        for match in match1v1:
-            match_data = MatchSerializer(match).data
-            match_data["type"] = "1v1"
-            match_list.append(match_data)
+        try:
+            match1v1=[]
+            matchall = []
+            match_list = []
+            if hostel is None and sport is None:
+                match1v1 = Match.objects.all()
+                matchall = Match_all.objects.all()
+                # print(h in matchall[0].hostels.all())
+            elif sport is None:
+                h = Hostel.objects.get(id=hostel)
+                match1v1 = Match.objects.all().filter(Q(team1=hostel) | Q(team2=hostel))
+                matchall = [match for match in Match_all.objects.all() if h in match.hostels.all()]
+            elif hostel is None:
+                match1v1 = Match.objects.all().filter(sport=sport)
+                matchall = Match_all.objects.all().filter(sport=sport)
+            else:
+                match1v1 = Match.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
+                matchall = [match for match in Match_all.objects.all().filter(sport=sport) if h in match.hostels.all()]
             
-        for match in matchall:
-            match_data = MatchAllSerializer(match).data
-            match_data['type'] = "all"
-            match_list.append(match_data)
-        match_list.sort(key=sorthelper)
-        return response.Response({"data":match_list},status=status.HTTP_200_OK)
-        
-        # except:
-        #     return response.Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            for match in match1v1:
+                match_data = MatchSerializer(match).data
+                match_data["type"] = "1v1"
+                match_list.append(match_data)
+                
+            for match in matchall:
+                match_data = MatchAllSerializer(match).data
+                match_data['type'] = "all"
+                match_list.append(match_data)
+            match_list.sort(key=sorthelper)
+            return response.Response({"data":match_list},status=status.HTTP_200_OK)
+            
+        except:
+            return response.Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class StandingsAPIView(ListCreateAPIView):
     serializer_class = StandingSerializer
