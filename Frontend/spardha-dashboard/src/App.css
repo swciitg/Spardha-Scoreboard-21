@@ -180,6 +180,7 @@
   font-family: "Red Hat Display", sans-serif;
   border: 1px solid #000000;
   border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
 .result_sport {
@@ -225,4 +226,10 @@
   background-color: #00c51f33;
   padding: 0.3rem;
   font-weight: 500;
+}
+
+.result_sport_detail {
+  font-weight: 500;
+  color: #7a8088;
+  font-size: 0.9rem;
 }
