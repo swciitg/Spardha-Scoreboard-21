@@ -136,6 +136,10 @@
   border: none;
 }
 
+.standings_dropdown:focus {
+  outline: none;
+}
+
 .standings_dropdown_text {
   font-weight: 300;
 

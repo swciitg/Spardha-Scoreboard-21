@@ -5,41 +5,67 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 const Results = (props) => {
   const [date, setDate] = useState(new Date());
-  const baseApiURL = 'http://localhost:8000/spardhaApi/';
-  const [hostelApiURL, setHostelApiURL] = useState(baseApiURL+'hostels/');
-  const [sportApiURL, setSportApiURL]  = useState(baseApiURL+'sports/');
-  const [resultsApiURL, setResultsApiURL] = useState(baseApiURL+'results/');
+  const baseApiURL = 'https://swc.iitg.ac.in/spardhaApi/';
+  const [hostelApiURL, setHostelApiURL] = useState(baseApiURL + 'hostels/');
+  const [sportApiURL, setSportApiURL] = useState(baseApiURL + 'sports/');
+  const [matchesApiURL, setMatchesApiURL] = useState(baseApiURL + 'matches/');
   const [hostels, setHostels] = useState([]);
   const [sports, setSports] = useState([]);
-  const [results, setResults] = useState([]);
-  const [selectedHostel, setSelectedHostel] = useState('');
-  const [selectedSport, setSelectedSport] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedResults, setSelectedResults] = useState([]);
-
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedHostel1, setSelectedHostel1] = useState('-1');
+  const [selectedHostel2, setSelectedHostel2] = useState('-1');
+  const [selectedSport, setSelectedSport] = useState('-1');
+  const [selectedDate, setSelectedDate] = useState('-1');
 
   useEffect(() => {
-    axios.get(hostelApiURL).then((response) =>{
+    setLoading(true);
+    axios.get(hostelApiURL).then((response) => {
       console.log(response.data);
       setHostels(response.data);
-    })
+      setLoading(false);
+    });
   }, [hostelApiURL]);
+
   useEffect(() => {
-    axios.get(sportApiURL).then((response) =>{
+    setLoading(true);
+    axios.get(sportApiURL).then((response) => {
       console.log(response.data);
       setSports(response.data);
-    })
+      setLoading(false);
+    });
   }, [sportApiURL]);
   useEffect(() => {
-    axios.get(resultsApiURL).then((response) =>{
-      console.log(response.data);
-      setResults(response.data);
-    })
-  }, [resultsApiURL]);
-
+    console.log('triggered');
+    setLoading(true);
+    console.log(selectedHostel1);
+    console.log(selectedHostel2);
+    console.log(selectedSport);
+    if (
+      selectedHostel1 !== '-1' &&
+      selectedHostel2 !== '-1' &&
+      selectedSport !== '-1'
+    ) {
+      axios
+        .get(
+          matchesApiURL +
+            '?team1=' +
+            selectedHostel1 +
+            '&team2=' +
+            selectedHostel2 +
+            '&sport=' +
+            selectedSport
+        )
+        .then((response) => {
+          console.log(response.data);
+          setMatches(response.data);
+          setLoading(false);
+        });
+    }
+    setLoading(false);
+  }, [matchesApiURL, selectedHostel1, selectedHostel2, selectedSport]);
 
   return (
     <div className='p-4'>
@@ -65,7 +91,6 @@ const Results = (props) => {
             ))}
           </select>
           <select className='results_dropdown w-2' name='' id=''>
-
             <option hidden>HOSTEL</option>
             {hostels.map((hostel, i) => (
               <option value={i}>{hostel.name}</option>
