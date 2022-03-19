@@ -50,6 +50,9 @@ class MatchList(ListAPIView):
             for match in matchall:
                 match_data = MatchAllSerializer(match).data
                 match_data['type'] = "all"
+                scores = Score.objects.all(match = match)
+                for score in scores:
+                    match_data['scores'][score.hostel.name] = score.score
                 match_list.append(match_data)
             match_list.sort(key=sorthelper)
             return response.Response({"data":match_list},status=status.HTTP_200_OK)
