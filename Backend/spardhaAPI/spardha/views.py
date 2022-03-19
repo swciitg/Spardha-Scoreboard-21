@@ -1,7 +1,7 @@
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework import status,filters
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Hostel,Point,Match,Sport
+from .models import *
 from .serializers import *
 # Create your views here.
 
@@ -27,6 +27,26 @@ class MatchAPIView(ListCreateAPIView):
     ordering_fields = ['date_time']
     ordering = ['-date_time']
     search_fields = ['team1__name','team2__name','sport__name']
+
+class MatchAPIView(ListCreateAPIView):
+    serializer_class = MatchSerializer
+    queryset = Match.objects.all()
+    filterset_fields = ['id','status','team1','team2','sport','date_time']
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
+    ordering_fields = ['date_time']
+    ordering = ['-date_time']
+    search_fields = ['team1__name','team2__name','sport__name']
+
+
+class MatchAllAPIView(ListCreateAPIView):
+    serializer_class = MatchSerializer
+    queryset = Match_all.objects.all()
+    filterset_fields = ['id','status','hostels','sport','date_time']
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
+    ordering_fields = ['date_time']
+    ordering = ['-date_time']
+    search_fields = ['team1__name','team2__name','sport__name']
+
 
 class HostelAPIView(ListCreateAPIView):
     serializer_class = HostelSerializer
