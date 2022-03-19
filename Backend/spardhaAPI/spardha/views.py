@@ -1,14 +1,61 @@
 from rest_framework.generics import ListCreateAPIView, ListAPIView
-from rest_framework import status,filters
+from rest_framework import status,filters,response
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 from .serializers import *
+from django.db.models import Q
+
 # Create your views here.
 
 class OverallStandingsAPIView(ListCreateAPIView):
     serializer_class = HostelSerializer
     queryset = Hostel.objects.all().order_by('-overall_points')
 
+class MatchList(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = Match.objects.all()
+        hostel = self.request.query_params.get('hostel')
+        sport = self.request.query_params.get('sport')
+        def sorthelper(e):
+            return e["date_time"]
+        # try:
+        match1v1=[]
+        matchall = []
+        match_list = []
+
+        if hostel is None and sport is None:
+            match1v1 = Match.objects.all()
+            matchall = Match_all.objects.all()
+            print(matchall[0].hostels)
+        elif sport is None:
+            match1v1 = Match.objects.all().filter(Q(team1=hostel) | Q(team2=hostel))
+            matchall = Match_all.objects.all().filter(hostels__contains=hostel)
+        elif hostel is None:
+            match1v1 = Match.objects.all().filter(sport=sport)
+            matchall = Match_all.objects.all().filter(sport=sport)
+        else:
+            match1v1 = Match.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
+            matchall = Match_all.objects.all().filter(sport=sport).filter(hostels__contains=hostel)
+        
+        for match in match1v1:
+                match_data = MatchSerializer(match).data
+                match_data["type"] = "1v1"
+                match_list.append(match_data)
+            
+        for match in matchall:
+            match_data = MatchAllSerializer(match).data
+            match_data['type'] = "all"
+            match_list.append(match_data)
+        match_list.sort(key=sorthelper)
+        return response.Response({"data":match_list},status=status.HTTP_200_OK)
+        
+        # except:
+        #     return response.Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class StandingsAPIView(ListCreateAPIView):
     serializer_class = StandingSerializer
@@ -60,3 +107,4 @@ class SportAPIView(ListCreateAPIView):
     ordering_fields = ['name']
     ordering = ['name']
     search_fields = ['name','hostels__name']
+
