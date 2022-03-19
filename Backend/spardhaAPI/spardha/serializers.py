@@ -29,7 +29,7 @@ class MatchSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Match
-        fields = ['team1','team2','sport','date_time','status','stage']
+        fields = ['team1','team2','sport','date_time','status','stage','score1','score2']
 
         
         

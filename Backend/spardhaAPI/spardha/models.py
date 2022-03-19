@@ -74,4 +74,4 @@ class Score(models.Model):
     score = models.IntegerField()
 
     def __str__(self):
-        return self.sport.name+" ( "+self.hostel.name+" ) "
+        return self.match.name +" ( "+self.hostel.name+" ) "

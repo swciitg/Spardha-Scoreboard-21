@@ -23,6 +23,7 @@ class StageAdmin(admin.ModelAdmin):
 
 class ScoreAdmin(admin.ModelAdmin):
     list_display = ['match','hostel','score']
+    list_filter = ['match','hostel']
     ordering = ['match']
 
 class PointAdmin(admin.ModelAdmin):
