@@ -59,6 +59,14 @@ class Match_all(models.Model):
     def __str__(self):
         return self.sport.name + " - " + self.round.stage
 
+    # def save(self, *args, **kwargs):
+    #     super(Match_all, self).save(*args, **kwargs)
+    #     print(self.hostels.all())
+    #     for hostel in self.hostels.all():
+    #         score = Score.objects.create(hostel = hostel,match=self,score=0)
+    #         print(score)
+    #         score.save()
+
 class Point(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostels", on_delete=models.CASCADE,null= True)
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
@@ -74,6 +82,9 @@ class Score(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostel", on_delete=models.CASCADE,null= True)
     match = models.ForeignKey("Match_all",  on_delete=models.CASCADE,null= True)
     score = models.IntegerField()
+
+    class Meta:
+        unique_together = ('hostel', 'match',)
 
     def __str__(self):
         return self.match.name+" ( "+self.hostel.name+" ) "

@@ -1,7 +1,7 @@
 import React from 'react';
 import StandingsItem from './StandingsItem';
 
-const ResultB = (props) => {
+const ScheduleB = (props) => {
 
     console.log(props.scores);
 
@@ -9,7 +9,7 @@ const ResultB = (props) => {
     var i = 0;
     for (const key in props.scores) {
         console.log(`${key}: ${props.scores[key]}`);
-        standings.push(<StandingsItem Name={key} Points={props.scores[key]} Index={i} />)
+        standings.push(<StandingsItem Name={key} Index={i} />)
         i++;
     }
 
@@ -27,10 +27,9 @@ const ResultB = (props) => {
             </div>
             <div className="d-flex flex-row justify-content-between mt-1">
                 <div className="result_stage">Group Stage</div>
-                <div className="result_final_text">{Object.keys(props.scores)[0]} won</div>
             </div>
         </div>
     )
 };
 
-export default ResultB;
+export default ScheduleB;
