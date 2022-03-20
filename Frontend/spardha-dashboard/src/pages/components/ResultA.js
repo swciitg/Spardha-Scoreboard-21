@@ -5,7 +5,7 @@ const ResultA = (props) => {
 return (
     <div className="result_A">
         <div className="d-flex flex-row justify-content-between">
-            <div className="result_sport"><span>{props.sport}</span> <span>{"<" +props.type + ">"}</span></div>
+            <div className="result_sport"><span>{props.sport}</span> <span>{/* "<" +props.type + ">" */}</span></div>
             <div><span className="result_date">{props.date}</span> <span className="vertical_line">|</span> <span className="result_date">{props.time}</span></div>
         </div>
         <div className="result_details">
@@ -27,7 +27,7 @@ return (
                 <div className="result_score_loser">{props.score2}</div>
             </div>
         </div>
-        <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-between align-items-center">
             <div className="result_stage">Stage {props.stage}</div>
             <div className="result_final_text">{props.team1} won</div>
         </div>

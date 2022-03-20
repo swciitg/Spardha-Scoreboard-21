@@ -5,7 +5,7 @@ const ScheduleA = (props) => {
 return (
     <div className="result_A">
         <div className="d-flex flex-row justify-content-between">
-            <div className="result_sport"><span>{props.sport}</span> <span>{"<" +props.type + ">"}</span></div>
+            <div className="result_sport"><span>{props.sport}</span> <span>{/* "<" +props.type + ">" */}</span></div>
             <div><span className="result_date">{props.date}</span> <span className="vertical_line">|</span> <span className="result_date">{props.time}</span></div>
         </div>
         <div className="result_details">
