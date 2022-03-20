@@ -52,7 +52,6 @@ class Match_all(models.Model):
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     round = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
-    scores = models.TextField(null=True,blank=True)
 
     @property
     def name(self):
