@@ -43,33 +43,12 @@ const Results = (props) => {
     console.log(selectedHostel);
     console.log(selectedSport);
     axios.get(
-          matchesApiURL +
-            '?team1=' +
-            selectedHostel +
-            '&team2=' +
-            '' +
-            '&sport=' +
-            selectedSport
+          matchesApiURL
         )
         .then((response) => {
           console.log(response.data);
-          let matches1 = response.data;
-          axios.get(
-            matchesApiURL +
-              '?team1=' +
-              '' +
-              '&team2=' +
-              selectedHostel +
-              '&sport=' +
-              selectedSport
-          ).then((response)=>{
-            matches1 = matches1.concat(response.data);
-            console.log("all matches are here");
-            console.log(matches1);
-            setMatches(matches1);
-            setLoading(false);
-          })
-          
+          setMatches(response.data.data);
+          setLoading(false);
         });
   }, [matchesApiURL, selectedHostel, selectedSport]);
 
@@ -80,9 +59,8 @@ const Results = (props) => {
     setSelectedSport(e.target.value);
   };
 
-
   return (
-    <div className='p-4'>
+    <div className='p-4 results'>
       <div className='results_header d-flex flex-row align-items-center'>
         <div className='results_text'>RESULTS</div>
       </div>
@@ -114,19 +92,11 @@ const Results = (props) => {
       {loading ? (
         <p>Loading...</p>
       ) : (matches.map((match, i) => (
-        <ResultA
-          Team1={match.team1}
-          Team2={match.team2}
-          Sport={match.sport}
-          Stage={match.stage}
-          Status={match.status}
-          Date_time={match.datetime}
-        />
-      ))
         
-      )}
-      
-      <ResultB Sport = 'Basketball' Stage = {1} Status = {false} Date_time = '2022-03-19T04:25:52Z'/>
+        match.type === 'all' ? 
+          match.status === true && <ResultB {...match}/> : match.status === true && <ResultA {...match}/>
+      ))
+      )} 
     </div>
   );
 };

@@ -21,6 +21,10 @@ class MatchList(ListAPIView):
         queryset = Match.objects.all()
         hostel = self.request.query_params.get('hostel')
         sport = self.request.query_params.get('sport')
+        if not hostel:
+            hostel = None
+        if not sport:
+            sport = None
         def sorthelper(e):
             return e["date"]+"Z"+e["time"]
         try:
@@ -50,15 +54,16 @@ class MatchList(ListAPIView):
             for match in matchall:
                 match_data = MatchAllSerializer(match).data
                 match_data['type'] = "all"
-                scores = Score.objects.all(match = match)
+                scores = Score.objects.all().filter(match = match)
+                match_data['scores'] = {}
                 for score in scores:
                     match_data['scores'][score.hostel.name] = score.score
                 match_list.append(match_data)
             match_list.sort(key=sorthelper)
             return response.Response({"data":match_list},status=status.HTTP_200_OK)
             
-        except:
-            return response.Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+            return response.Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class StandingsAPIView(ListCreateAPIView):
     serializer_class = StandingSerializer
@@ -72,22 +77,12 @@ class StandingsAPIView(ListCreateAPIView):
 class MatchAPIView(ListCreateAPIView):
     serializer_class = MatchSerializer
     queryset = Match.objects.all()
-<<<<<<< HEAD
-    filterset_fields = ['team1','team2','sport','date_time']
-    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
-    ordering_fields = ['date_time']
-    ordering = ['-date_time']
-    search_fields = ['team1__name','team2__name','sport__name']
-
-=======
     filterset_fields = ['id','status','team1','team2','sport','date']
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     ordering_fields = ['date']
     ordering = ['-date']
     search_fields = ['team1__name','team2__name','sport__name']
 
-
->>>>>>> fdee63c07f564b662954e884c56bbdb950feb6dc
 class MatchAllAPIView(ListCreateAPIView):
     serializer_class = MatchAllSerializer
     queryset = Match_all.objects.all()
@@ -110,7 +105,3 @@ class SportAPIView(ListCreateAPIView):
     ordering_fields = ['name']
     ordering = ['name']
     search_fields = ['name','hostels__name']
-<<<<<<< HEAD
-=======
-
->>>>>>> fdee63c07f564b662954e884c56bbdb950feb6dc
