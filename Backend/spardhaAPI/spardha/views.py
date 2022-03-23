@@ -18,7 +18,7 @@ class MatchList(ListAPIView):
         Optionally restricts the returned purchases to a given user,
         by filtering against a `username` query parameter in the URL.
         """
-        queryset = Match.objects.all()
+        queryset = MatchA.objects.all()
         hostel = self.request.query_params.get('hostel')
         sport = self.request.query_params.get('sport')
         def sorthelper(e):
@@ -28,19 +28,19 @@ class MatchList(ListAPIView):
             matchall = []
             match_list = []
             if hostel is None and sport is None:
-                match1v1 = Match.objects.all()
-                matchall = Match_all.objects.all()
+                match1v1 = MatchA.objects.all()
+                matchall = MatchD.objects.all()
                 # print(h in matchall[0].hostels.all())
             elif sport is None:
                 h = Hostel.objects.get(id=hostel)
-                match1v1 = Match.objects.all().filter(Q(team1=hostel) | Q(team2=hostel))
-                matchall = [match for match in Match_all.objects.all() if h in match.hostels.all()]
+                match1v1 = MatchA.objects.all().filter(Q(team1=hostel) | Q(team2=hostel))
+                matchall = [match for match in MatchD.objects.all() if h in match.hostels.all()]
             elif hostel is None:
-                match1v1 = Match.objects.all().filter(sport=sport)
-                matchall = Match_all.objects.all().filter(sport=sport)
+                match1v1 = MatchA.objects.all().filter(sport=sport)
+                matchall = MatchD.objects.all().filter(sport=sport)
             else:
-                match1v1 = Match.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
-                matchall = [match for match in Match_all.objects.all().filter(sport=sport) if h in match.hostels.all()]
+                match1v1 = MatchA.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
+                matchall = [match for match in MatchD.objects.all().filter(sport=sport) if h in match.hostels.all()]
             
             for match in match1v1:
                 match_data = MatchSerializer(match).data
@@ -68,7 +68,7 @@ class StandingsAPIView(ListCreateAPIView):
 
 class MatchAPIView(ListCreateAPIView):
     serializer_class = MatchSerializer
-    queryset = Match.objects.all()
+    queryset = MatchA.objects.all()
     filterset_fields = ['id','status','team1','team2','sport','date']
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     ordering_fields = ['date']
@@ -78,7 +78,7 @@ class MatchAPIView(ListCreateAPIView):
 
 class MatchAllAPIView(ListCreateAPIView):
     serializer_class = MatchAllSerializer
-    queryset = Match_all.objects.all()
+    queryset = MatchD.objects.all()
     filterset_fields = ['id','status','hostels','sport','date']
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     ordering_fields = ['date']

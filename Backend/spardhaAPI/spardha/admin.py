@@ -42,10 +42,15 @@ class MatchAdmin(admin.ModelAdmin):
     list_filter = ['status','sport','stage','team1','team2',]
     ordering = ['date']
 
+class MatchSetAdmin(admin.ModelAdmin):
+    list_display = ['name','sport','date','time','status']
+    list_filter = ['status','sport','team1','team2',]
+    ordering = ['date']
+
 class MatchAllForm(forms.ModelForm):
 
     class Meta:
-        model = Match_all
+        model = MatchD
         exclude = []
     def __init__(self, *args, **kwargs):
         # print("Called")
@@ -95,8 +100,9 @@ class MatchAllAdmin(admin.ModelAdmin):
 admin.site.register(Hostel,HostelAdmin)
 admin.site.register(Format,FormatAdmin)
 admin.site.register(Sport,SportAdmin)
-admin.site.register(Match,MatchAdmin)
-admin.site.register(Match_all,MatchAllAdmin)
+admin.site.register(MatchA,MatchAdmin)
+admin.site.register(MatchD,MatchAllAdmin)
 admin.site.register(Stage,StageAdmin)
 admin.site.register(Point,PointAdmin)
 admin.site.register(Score,ScoreAdmin)
+admin.site.register(Match_set,MatchSetAdmin)
