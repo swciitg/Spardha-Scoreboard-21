@@ -64,12 +64,12 @@ class MatchList(ListAPIView):
                 matchall = [match for match in MatchD.objects.all().filter(sport=sport) if h in match.hostels.all()]
             
             for match in match1v1:
-                match_data = MatchSerializer(match).data
+                match_data = MatchASerializer(match).data
                 match_data["type"] = "1v1"
                 match_list.append(match_data)
                 
             for match in matchall:
-                match_data = MatchAllSerializer(match).data
+                match_data = MatchDSerializer(match).data
                 match_data['type'] = "all"
                 match_list.append(match_data)
             match_list.sort(key=sorthelper)
@@ -88,7 +88,7 @@ class StandingsAPIView(ListAPIView):
     search_fields = ['hostel__name','sport__name']
 
 class MatchAPIView(ListCreateAPIView):
-    serializer_class = MatchSerializer
+    serializer_class = MatchASerializer
     queryset = MatchA.objects.all()
     filterset_fields = ['id','status','team1','team2','sport','date']
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
@@ -98,7 +98,7 @@ class MatchAPIView(ListCreateAPIView):
 
 
 class MatchAllAPIView(ListAPIView):
-    serializer_class = MatchAllSerializer
+    serializer_class = MatchDSerializer
     queryset = MatchD.objects.all()
     filterset_fields = ['id','status','hostels','sport','date']
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]

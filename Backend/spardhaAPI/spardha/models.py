@@ -17,48 +17,18 @@ class Hostel(models.Model):
     def __str__(self):
         return self.name
 
+# class Format(models.Model):
+#     format = models.CharField(max_length=10,
+#     help_text="A - Football, Hockey, Cricket, Khokho, Basketball, Water Polo.  B - Lawn Tennis, Volleyball. C - Badminton, Table Tennis, Squash. D - Rest everything")
 
-class Format(models.Model):
-    format = models.CharField(max_length=10,
-    help_text="A - Football, Hockey, Cricket, Khokho, Basketball, Water Polo.  B - Lawn Tennis, Volleyball. C - Badminton, Table Tennis, Squash. D - Rest everything")
-
-    def __str__(self):
-        return self.format
-
-
-class Game(models.Model):
-    score_team1 = models.CharField(max_length=15,null=True,blank=True)
-    score_team2 = models.CharField(max_length=15,null=True,blank=True)
-    match = models.ForeignKey("MatchB", on_delete=models.CASCADE,null=True)
-
-    def __str__(self):
-        return "game"
-
-class Set(models.Model):
-    name = models.CharField(max_length=11,null=True,blank=True)
-    score_team1_game1 = models.CharField(max_length=15,null=True,blank=True)
-    score_team2_game1 = models.CharField(max_length=15,null=True,blank=True)
-
-    score_team1_game2 = models.CharField(max_length=15,null=True,blank=True)
-    score_team2_game2 = models.CharField(max_length=15,null=True,blank=True)
-   
-    score_team1_game3 = models.CharField(max_length=15,null=True,blank=True)
-    score_team2_game3 = models.CharField(max_length=15,null=True,blank=True)
-    
-    score_team1_game4 = models.CharField(max_length=15,null=True,blank=True)
-    score_team2_game4 = models.CharField(max_length=15,null=True,blank=True)
-   
-    score_team1_game5 = models.CharField(max_length=15,null=True,blank=True)
-    score_team2_game5 = models.CharField(max_length=15,null=True,blank=True)
-    match = models.ForeignKey("MatchC", related_name="game", on_delete=models.CASCADE,null=True)
-
-    def __str__(self):
-        return "sets"
+#     def __str__(self):
+#         return self.format
 
 class Sport(models.Model):
+    FORMATS = ((1,'A'),(2,'B'),(3,'C'),(4,'D'))
     name = models.CharField(max_length=100,null=True)
-    hostels = models.ManyToManyField("Hostel")
-    format = models.ForeignKey("Format",help_text="A - Football, Hockey, Cricket, Khokho, Basketball, Water Polo.  B - Lawn Tennis, Volleyball. C - Badminton, Table Tennis, Squash. D - Rest everything",  on_delete=models.CASCADE,null= True)
+    # hostels = models.ManyToManyField("Hostel")
+    format = models.IntegerField(choices=FORMATS,help_text="A - Football, Hockey, Cricket, Khokho, Basketball, Water Polo.  B - Lawn Tennis, Volleyball. C - Badminton, Table Tennis, Squash. D - Rest everything")
 
     def __str__(self):
         return self.name
@@ -68,6 +38,25 @@ class Stage(models.Model):
 
     def __str__(self):
         return self.stage
+
+class Point(models.Model):
+    hostel = models.ForeignKey("Hostel", related_name="hostels", on_delete=models.CASCADE,null= True)
+    sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
+    points = models.IntegerField()
+
+    class Meta:
+        unique_together = ('hostel', 'sport',)
+
+    def __str__(self):
+        return self.sport.name+" ( "+self.hostel.name+" ) "
+
+    def save(self, *args, **kwargs):
+        super(Point, self).save(*args, **kwargs)
+        total_score = 0
+        for point in Point.objects.all().filter(hostel=self.hostel):
+            total_score = total_score + point.points
+        self.hostel.overall_points = total_score
+        self.hostel.save()
 
 class MatchA(models.Model):
     TEAMS = ((1,'team1'),(2,'team2'))
@@ -128,25 +117,6 @@ class MatchD(models.Model):
         return self.sport.name + " - " + self.round.stage
 
 
-class Point(models.Model):
-    hostel = models.ForeignKey("Hostel", related_name="hostels", on_delete=models.CASCADE,null= True)
-    sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
-    points = models.IntegerField()
-
-    class Meta:
-        unique_together = ('hostel', 'sport',)
-
-    def __str__(self):
-        return self.sport.name+" ( "+self.hostel.name+" ) "
-
-    def save(self, *args, **kwargs):
-        super(Point, self).save(*args, **kwargs)
-        total_score = 0
-        for point in Point.objects.all().filter(hostel=self.hostel):
-            total_score = total_score + point.points
-        self.hostel.overall_points = total_score
-        self.hostel.save()
-
 
 class Score(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostel", on_delete=models.CASCADE,null= True)
@@ -159,32 +129,31 @@ class Score(models.Model):
     def __str__(self):
         return self.match.name+" ( "+self.hostel.name+" ) "
 
-class Match_set(models.Model):
-    TEAMS = ((1,'team1'),(2,'team2'))
-    sport = models.ForeignKey("Sport", related_name="game",  on_delete=models.CASCADE,null= True)
-    status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
-    date = models.DateField(null=True)
-    time = models.TimeField(null=True)
-    team1 = models.ForeignKey("Hostel", related_name="P1", on_delete=models.CASCADE,null= True)
-    team2 = models.ForeignKey("Hostel", related_name="P2", on_delete=models.CASCADE,null= True)
-    format1 = models.CharField(null = True, blank= True,max_length=10)
-    game1_score1 = models.CharField(null = True, blank= True,max_length=10)
-    game1_score2 = models.CharField(null = True, blank= True,max_length=10)
-    format2 = models.CharField(null = True, blank= True,max_length=10)
-    game2_score1 = models.CharField(null = True, blank= True,max_length=10)
-    game2_score2 = models.CharField(null = True, blank= True,max_length=10)
-    format3 = models.CharField(null = True, blank= True,max_length=10)
-    game3_score1 = models.CharField(null = True, blank= True,max_length=10)
-    game3_score2 = models.CharField(null = True, blank= True,max_length=10)
-    format4 = models.CharField(null = True, blank= True,max_length=10)
-    game4_score1 = models.CharField(null = True, blank= True,max_length=10)
-    game4_score2 = models.CharField(null = True, blank= True,max_length=10)
-    format5 = models.CharField(null = True, blank= True,max_length=10)
-    game5_score1 = models.CharField(null = True, blank= True,max_length=10)
-    game5_score2 = models.CharField(null = True, blank= True,max_length=10)
-    
-    winner = models.IntegerField(choices=TEAMS,null=True,blank=True)
+class Game(models.Model): # For match B
+    score_team1 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2 = models.CharField(max_length=15,null=True,blank=True)
+    match = models.ForeignKey("MatchB", on_delete=models.CASCADE,null=True)
 
-    @property
-    def name(self):
-        return self.team1.name+" vs "+self.team2.name
+    def __str__(self):
+        return "game"
+
+class Set(models.Model): # For match C
+    name = models.CharField(max_length=11,null=True,blank=True)
+    score_team1_game1 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game1 = models.CharField(max_length=15,null=True,blank=True)
+
+    score_team1_game2 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game2 = models.CharField(max_length=15,null=True,blank=True)
+   
+    score_team1_game3 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game3 = models.CharField(max_length=15,null=True,blank=True)
+    
+    score_team1_game4 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game4 = models.CharField(max_length=15,null=True,blank=True)
+   
+    score_team1_game5 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game5 = models.CharField(max_length=15,null=True,blank=True)
+    match = models.ForeignKey("MatchC", related_name="game", on_delete=models.CASCADE,null=True)
+
+    def __str__(self):
+        return "sets"

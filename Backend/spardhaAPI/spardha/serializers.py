@@ -22,7 +22,7 @@ class StandingSerializer(serializers.ModelSerializer):
         model = Point
         fields = ['hostel', 'sport', 'points']
 
-class MatchSerializer(serializers.ModelSerializer):
+class MatchASerializer(serializers.ModelSerializer):
     team1 = serializers.SlugRelatedField(read_only=True,slug_field='name')
     team2 = serializers.SlugRelatedField(read_only=True,slug_field='name')
     sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
@@ -31,8 +31,16 @@ class MatchSerializer(serializers.ModelSerializer):
         model = MatchA
         fields = ['team1','team2','sport','date','time','status','score1','score2','stage']
 
-        
-class MatchAllSerializer(serializers.ModelSerializer):
+
+class MatchBSerializer(serializers.ModelSerializer):
+    team1 = serializers.SlugRelatedField(read_only=True,slug_field='name')
+    team2 = serializers.SlugRelatedField(read_only=True,slug_field='name')
+    sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
+
+    class Meta:
+        model = MatchB
+        fields = ['team1','team2','sport','date','time','status','score1','score2','stage']
+class MatchDSerializer(serializers.ModelSerializer):
     sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
     round = serializers.SlugRelatedField(read_only=True,slug_field='stage')
 
