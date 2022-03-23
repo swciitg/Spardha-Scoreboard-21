@@ -243,7 +243,6 @@
   font-weight: 700;
   color: #cad1e2;
   font-size: 1.2rem;
-  margin-right: 1rem;
 }
 
 .result_stage {
@@ -262,6 +261,10 @@
 .result_list_item {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
+}
+
+.loser_div {
+  margin-right: 0.4rem;
 }
 
 .results {

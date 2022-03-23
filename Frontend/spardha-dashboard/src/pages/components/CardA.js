@@ -34,7 +34,10 @@ return (
                     <div className="standings_item_name">{props.team2}</div>
                 </div>
                 {props.result && 
-                <div className="result_score_loser">{props.score2}</div>
+                <div className="d-flex flex-row align-items-center loser_div">
+                    <div className="result_score_loser standings_item_name">{props.score2}</div>
+                </div>
+                
                 }
             </div>
         </div>

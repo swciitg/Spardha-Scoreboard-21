@@ -1,9 +1,6 @@
 import React from 'react';
-import StandingsItem from './StandingsItem';
 
-const ResultB = (props) => {
-
-    console.log(props.scores);
+const CardC = (props) => {
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -13,34 +10,51 @@ const ResultB = (props) => {
 
     var time = toDateWithOutTimeZone(props.time);
 
-    var standings = [];
-    var i = 0;
-    for (const key in props.scores) {
-        console.log(`${key}: ${props.scores[key]}`);
-        standings.push(<StandingsItem Name={key} Points={props.scores[key]} Index={i} Result = {props.result}/>)
-        i++;
-    }
-
-    return (
-        <div className="result_A">
-            <div className="d-flex flex-row justify-content-between align-items-center">
-                <div className="d-flex flex-column">
-                    <div className="result_sport">{props.sport}</div>
-                    {/* <div className="result_sport_detail">{props.sport}</div> */}
+return (
+    <div className="result_A">
+        <div className="d-flex flex-row justify-content-between">
+            <div className="result_sport"><span>{props.sport}</span> <span>{/* "<" +props.type + ">" */}</span></div>
+            <div><span className="result_date">{date_of_month} {month}</span> <span className="vertical_line">|</span> <span className="result_date">{formatAMPM(time)}</span></div>
+        </div>
+        <div className="result_details">
+            <div className="d-flex flex-row justify-content-between result_list_item">
+                <div className="result_hostel d-flex flex-row align-items-center">
+                    <div className="standings_item_circle"></div>
+                    <div className="standings_item_name">{props.team1}</div>
                 </div>
-                <div><span className="result_date">{date_of_month} {month}</span> <span className="vertical_line">|</span> <span className="result_date">{formatAMPM(time)}</span></div>
-            </div>
-            <div className="result_details">
-                {standings}
-            </div>
-            <div className="d-flex flex-row justify-content-between mt-1 align-items-center">
-                <div className="result_stage">{props.round}</div>
                 {props.result && 
-                <div className="result_final_text">{Object.keys(props.scores)[0]} won</div>
+                <div className="d-flex flex-row align-items-center">
+                    {props.scores.map((score, i) => (
+                        <div className="result_score_winner standings_item_name">{score.score_team1}</div>
+                    ))}
+                    <img src="./left_arrow.png" alt="arrow" className="arrow_img" />
+                </div>}
+            </div>
+            <div className="d-flex flex-row justify-content-between result_list_item">
+                <div className="result_hostel d-flex flex-row align-items-center">
+                    <div className="standings_item_circle"></div>
+                    <div className="standings_item_name">{props.team2}</div>
+                </div>
+                {props.result && 
+                <div className="d-flex flex-row align-items-center loser_div">
+                    {props.scores.map((score, i) => (
+                        <div className="result_score_loser standings_item_name">{score.score_team2}</div>
+                    ))}
+                </div>
+                
                 }
             </div>
         </div>
-    )
+        <div className="d-flex flex-row justify-content-between align-items-center">
+            <div className="result_stage">Stage {props.stage}</div>
+            {props.result && 
+            <div className="result_final_text">{props.team1} won</div>
+            }
+        </div>
+
+        
+    </div>
+  )
 };
 
 function toDateWithOutTimeZone(date) {
@@ -63,5 +77,4 @@ function formatAMPM(date) {
     var strTime = hours + ':' + minutes + " " + ampm;
     return strTime;
 }
-
-export default ResultB;
+export default CardC;
