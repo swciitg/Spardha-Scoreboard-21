@@ -53,7 +53,7 @@ class Set(models.Model):
 class Sport(models.Model):
     name = models.CharField(max_length=100,null=True)
     hostels = models.ManyToManyField("Hostel")
-    format = models.ForeignKey("Format",  on_delete=models.CASCADE,null= True)
+    format = models.ForeignKey("Format",help_text="A - Football, Hockey, Cricket, Khokho, Basketball, Water Polo.  B - Lawn Tennis, Volleyball. C - Badminton, Table Tennis, Squash. D - Rest everything",  on_delete=models.CASCADE,null= True)
 
     def __str__(self):
         return self.name
@@ -65,6 +65,7 @@ class Stage(models.Model):
         return self.stage
 
 class MatchA(models.Model):
+    TEAMS = ((1,'team1'),(2,'team2'))
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
     date = models.DateField(null=True)
@@ -74,7 +75,7 @@ class MatchA(models.Model):
     stage = models.ForeignKey("Stage", on_delete=models.CASCADE,null= True)
     score1 = models.CharField(max_length=15,null=True,blank=True)
     score2 = models.CharField(max_length=15,null=True,blank=True)
-
+    winner = models.IntegerField(choices=TEAMS,null=True,blank=True)
     @property
     def name(self):
         return self.team1.name+" vs "+self.team2.name
@@ -121,13 +122,6 @@ class MatchD(models.Model):
     def __str__(self):
         return self.sport.name + " - " + self.round.stage
 
-    # def save(self, *args, **kwargs):
-    #     super(Match_all, self).save(*args, **kwargs)
-    #     print(self.hostels.all())
-    #     for hostel in self.hostels.all():
-    #         score = Score.objects.create(hostel = hostel,match=self,score=0)
-    #         print(score)
-    #         score.save()
 
 class Point(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostels", on_delete=models.CASCADE,null= True)
