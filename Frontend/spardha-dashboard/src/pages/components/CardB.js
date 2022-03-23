@@ -10,6 +10,9 @@ const CardC = (props) => {
 
     var time = toDateWithOutTimeZone(props.time);
 
+    var team1_winner = true;
+    if(props.result && props.winner === 2){team1_winner = false;}
+
 return (
     <div className="result_A">
         <div className="d-flex flex-row justify-content-between">
@@ -20,12 +23,12 @@ return (
             <div className="d-flex flex-row justify-content-between result_list_item">
                 <div className="result_hostel d-flex flex-row align-items-center">
                     <div className="standings_item_circle"></div>
-                    <div className="standings_item_name">{props.team1}</div>
+                    <div className="standings_item_name">{team1_winner ? props.team1 : props.team2}</div>
                 </div>
                 {props.result && 
                 <div className="d-flex flex-row align-items-center">
                     {props.scores.map((score, i) => (
-                        <div className="result_score_winner standings_item_name">{score.score_team1}</div>
+                        <div className="result_score_winner standings_item_name">{team1_winner ? score.score_team1 : score.score_team2}</div>
                     ))}
                     <img src="./left_arrow.png" alt="arrow" className="arrow_img" />
                 </div>}
@@ -33,12 +36,12 @@ return (
             <div className="d-flex flex-row justify-content-between result_list_item">
                 <div className="result_hostel d-flex flex-row align-items-center">
                     <div className="standings_item_circle"></div>
-                    <div className="standings_item_name">{props.team2}</div>
+                    <div className="standings_item_name">{team1_winner ? props.team2 : props.team1}</div>
                 </div>
                 {props.result && 
                 <div className="d-flex flex-row align-items-center loser_div">
                     {props.scores.map((score, i) => (
-                        <div className="result_score_loser standings_item_name">{score.score_team2}</div>
+                        <div className="result_score_loser standings_item_name">{team1_winner ? score.score_team2 : score.score_team1}</div>
                     ))}
                 </div>
                 
@@ -48,11 +51,9 @@ return (
         <div className="d-flex flex-row justify-content-between align-items-center">
             <div className="result_stage">Stage {props.stage}</div>
             {props.result && 
-            <div className="result_final_text">{props.team1} won</div>
+            <div className="result_final_text">{team1_winner ? props.team1 : props.team2} won</div>
             }
         </div>
-
-        
     </div>
   )
 };
