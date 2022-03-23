@@ -1,5 +1,8 @@
+from pydoc import classname
 from pyexpat import model
 from random import choices
+from re import S
+import re
 from django.db import models
 from django.db.models.base import Model
 
@@ -18,9 +21,33 @@ class Format(models.Model):
     format = models.CharField(max_length=10,
     help_text="A - Football, Hockey, Cricket, Khokho, Basketball, Water Polo.  B - Lawn Tennis, Volleyball. C - Badminton, Table Tennis, Squash. D - Rest everything")
 
-
     def __str__(self):
         return self.format
+
+class Game_set(models.Model):
+    score_team1 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2 = models.CharField(max_length=15,null=True,blank=True)
+    set = models.ForeignKey("Set", on_delete=models.CASCADE,null=True)
+    match = models.ForeignKey("MatchC", on_delete=models.CASCADE,null=True)
+
+    def __str__(self):
+        return "set"
+
+
+class Game(models.Model):
+    score_team1 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2 = models.CharField(max_length=15,null=True,blank=True)
+    match = models.ForeignKey("MatchB", on_delete=models.CASCADE,null=True)
+
+    def __str__(self):
+        return "game"
+
+class Set(models.Model):
+    set_name = models.CharField(max_length=10,null=True)
+    match = models.ForeignKey("MatchC", related_name="game", on_delete=models.CASCADE,null=True)
+
+    def __str__(self):
+        return "sets"
 
 class Sport(models.Model):
     name = models.CharField(max_length=100,null=True)
@@ -43,7 +70,7 @@ class MatchA(models.Model):
     time = models.TimeField(null=True)
     team1 = models.ForeignKey("Hostel", related_name="team1", on_delete=models.CASCADE,null= True)
     team2 = models.ForeignKey("Hostel", related_name="team2", on_delete=models.CASCADE,null= True)
-    stage = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
+    stage = models.ForeignKey("Stage", on_delete=models.CASCADE,null= True)
     score1 = models.CharField(max_length=15,null=True,blank=True)
     score2 = models.CharField(max_length=15,null=True,blank=True)
 
@@ -52,15 +79,32 @@ class MatchA(models.Model):
         return self.team1.name+" vs "+self.team2.name
 
 class MatchB(models.Model):
+    TEAMS = ((1,'team1'),(2,'team2'))
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
     status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     team1 = models.ForeignKey("Hostel", related_name="player1", on_delete=models.CASCADE,null= True)
     team2 = models.ForeignKey("Hostel", related_name="player2", on_delete=models.CASCADE,null= True)
-    stage = models.ForeignKey("Stage",  on_delete=models.CASCADE,null= True)
+    stage = models.ForeignKey("Stage", on_delete=models.CASCADE,null= True)
+    winner = models.IntegerField(choices=TEAMS,null=True,blank=True)
 
+    def __str__(self):
+        return self.team1.name+" vs "+self.team2.name
 
+class MatchC(models.Model):
+    TEAMS = ((1,'team1'),(2,'team2'))
+    sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
+    status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
+    team1 = models.ForeignKey("Hostel", related_name="p1", on_delete=models.CASCADE,null= True)
+    team2 = models.ForeignKey("Hostel", related_name="p2", on_delete=models.CASCADE,null= True)
+    stage = models.ForeignKey("Stage", on_delete=models.CASCADE,null= True)
+    winner = models.IntegerField(choices=TEAMS,null=True,blank=True)
+
+    def __str__(self):
+        return self.team1.name+" vs "+self.team2.name
 
 class MatchD(models.Model):
     sport = models.ForeignKey("Sport",  on_delete=models.CASCADE,null= True)
@@ -112,8 +156,8 @@ class Match_set(models.Model):
     status = models.BooleanField(default= False,help_text="Enter 0 for upcoming and 1 for completed") 
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
-    team1 = models.ForeignKey("Hostel", related_name="p1", on_delete=models.CASCADE,null= True)
-    team2 = models.ForeignKey("Hostel", related_name="p2", on_delete=models.CASCADE,null= True)
+    team1 = models.ForeignKey("Hostel", related_name="P1", on_delete=models.CASCADE,null= True)
+    team2 = models.ForeignKey("Hostel", related_name="P2", on_delete=models.CASCADE,null= True)
     format1 = models.CharField(null = True, blank= True,max_length=10)
     game1_score1 = models.CharField(null = True, blank= True,max_length=10)
     game1_score2 = models.CharField(null = True, blank= True,max_length=10)

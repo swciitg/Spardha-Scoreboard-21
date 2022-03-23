@@ -15,6 +15,15 @@ class HostelAdmin(admin.ModelAdmin):
     list_display = ['name','overall_points']
     ordering = ['overall_points']
 
+class GameInline(admin.StackedInline):
+    model = Game
+
+class GameSetInline(admin.StackedInline):
+    model = Game_set
+
+class SetInline(admin.StackedInline):
+    model = Set
+
 class SportAdmin(admin.ModelAdmin):
     list_display = ['name','format']
     list_filter = ['format']
@@ -37,10 +46,17 @@ class PointAdmin(admin.ModelAdmin):
     list_filter = ['sport','hostel']
     ordering = ['sport','-points']
 
-class MatchAdmin(admin.ModelAdmin):
+class MatchAAdmin(admin.ModelAdmin):
     list_display = ['name','sport','stage','date','time','status']
     list_filter = ['status','sport','stage','team1','team2',]
     ordering = ['date']
+
+class MatchBAdmin(admin.ModelAdmin):
+    inlines = (GameInline, )
+
+class MatchCAdmin(admin.ModelAdmin):
+    inlines = (SetInline, GameSetInline)
+
 
 class MatchSetAdmin(admin.ModelAdmin):
     list_display = ['name','sport','date','time','status']
@@ -81,7 +97,7 @@ class MatchAllForm(forms.ModelForm):
             score.save()
         return super().save(*args, **kwargs)
 
-class MatchAllAdmin(admin.ModelAdmin):
+class MatchDAdmin(admin.ModelAdmin):
     list_display = ['sport','round', 'date','time','status']
     list_filter = ['status','sport','round']
     ordering = ['date']
@@ -100,9 +116,11 @@ class MatchAllAdmin(admin.ModelAdmin):
 admin.site.register(Hostel,HostelAdmin)
 admin.site.register(Format,FormatAdmin)
 admin.site.register(Sport,SportAdmin)
-admin.site.register(MatchA,MatchAdmin)
-admin.site.register(MatchD,MatchAllAdmin)
+admin.site.register(MatchA,MatchAAdmin)
+admin.site.register(MatchD,MatchDAdmin)
 admin.site.register(Stage,StageAdmin)
 admin.site.register(Point,PointAdmin)
 admin.site.register(Score,ScoreAdmin)
 admin.site.register(Match_set,MatchSetAdmin)
+admin.site.register(MatchB,MatchBAdmin)
+admin.site.register(MatchC,MatchCAdmin)
