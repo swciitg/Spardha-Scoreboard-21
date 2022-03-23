@@ -10,7 +10,7 @@ import Header from './Header';
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Navigation />
         <Switch>
