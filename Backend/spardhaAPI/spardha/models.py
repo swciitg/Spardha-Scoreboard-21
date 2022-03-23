@@ -143,20 +143,20 @@ class Game(models.Model): # For match B
 
 class Set(models.Model): # For match C
     name = models.CharField(max_length=11,null=True,blank=True)
-    score_team1_game1 = models.IntegerField(null=True,blank=True)
-    score_team2_game1 = models.IntegerField(null=True,blank=True)
+    team1_game1 = models.IntegerField(null=True,blank=True)
+    team2_game1 = models.IntegerField(null=True,blank=True)
 
-    score_team1_game2 = models.IntegerField(null=True,blank=True)
-    score_team2_game2 = models.IntegerField(null=True,blank=True)
+    team1_game2 = models.IntegerField(null=True,blank=True)
+    team2_game2 = models.IntegerField(null=True,blank=True)
    
-    score_team1_game3 = models.IntegerField(null=True,blank=True)
-    score_team2_game3 = models.IntegerField(null=True,blank=True)
+    team1_game3 = models.IntegerField(null=True,blank=True)
+    team2_game3 = models.IntegerField(null=True,blank=True)
     
-    score_team1_game4 = models.IntegerField(null=True,blank=True)
-    score_team2_game4 = models.IntegerField(null=True,blank=True)
+    team1_game4 = models.IntegerField(null=True,blank=True)
+    team2_game4 = models.IntegerField(null=True,blank=True)
    
-    score_team1_game5 = models.IntegerField(null=True,blank=True)
-    score_team2_game5 = models.IntegerField(null=True,blank=True)
+    team1_game5 = models.IntegerField(null=True,blank=True)
+    team2_game5 = models.IntegerField(null=True,blank=True)
     match = models.ForeignKey("MatchC", related_name="game", on_delete=models.CASCADE,null=True)
 
     def __str__(self):

@@ -69,7 +69,7 @@ class SetInline(admin.StackedInline):
     model = Set
     fieldsets = (
         (None, {
-            'fields': ('name',('score_team1_game1','score_team1_game2','score_team1_game3','score_team1_game4','score_team1_game5',),('score_team2_game1','score_team2_game2','score_team2_game3','score_team2_game4','score_team2_game5',))
+            'fields': ('name',('team1_game1','team1_game2','team1_game3','team1_game4','team1_game5',),('team2_game1','team2_game2','team2_game3','team2_game4','team2_game5',))
         }),
     )
 class MatchCAdmin(admin.ModelAdmin):
