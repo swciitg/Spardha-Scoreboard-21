@@ -24,15 +24,6 @@ class Format(models.Model):
     def __str__(self):
         return self.format
 
-class Game_set(models.Model):
-    score_team1 = models.CharField(max_length=15,null=True,blank=True)
-    score_team2 = models.CharField(max_length=15,null=True,blank=True)
-    set = models.ForeignKey("Set", on_delete=models.CASCADE,null=True)
-    match = models.ForeignKey("MatchC", on_delete=models.CASCADE,null=True)
-
-    def __str__(self):
-        return "set"
-
 
 class Game(models.Model):
     score_team1 = models.CharField(max_length=15,null=True,blank=True)
@@ -43,7 +34,21 @@ class Game(models.Model):
         return "game"
 
 class Set(models.Model):
-    set_name = models.CharField(max_length=10,null=True)
+    name = models.CharField(max_length=11,null=True,blank=True)
+    score_team1_game1 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game1 = models.CharField(max_length=15,null=True,blank=True)
+
+    score_team1_game2 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game2 = models.CharField(max_length=15,null=True,blank=True)
+   
+    score_team1_game3 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game3 = models.CharField(max_length=15,null=True,blank=True)
+    
+    score_team1_game4 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game4 = models.CharField(max_length=15,null=True,blank=True)
+   
+    score_team1_game5 = models.CharField(max_length=15,null=True,blank=True)
+    score_team2_game5 = models.CharField(max_length=15,null=True,blank=True)
     match = models.ForeignKey("MatchC", related_name="game", on_delete=models.CASCADE,null=True)
 
     def __str__(self):

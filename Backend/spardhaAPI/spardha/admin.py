@@ -18,9 +18,6 @@ class HostelAdmin(admin.ModelAdmin):
 class GameInline(admin.StackedInline):
     model = Game
 
-class GameSetInline(admin.StackedInline):
-    model = Game_set
-
 class SetInline(admin.StackedInline):
     model = Set
 
@@ -55,7 +52,7 @@ class MatchBAdmin(admin.ModelAdmin):
     inlines = (GameInline, )
 
 class MatchCAdmin(admin.ModelAdmin):
-    inlines = (SetInline, GameSetInline)
+    inlines = (SetInline, )
 
 
 class MatchSetAdmin(admin.ModelAdmin):
@@ -116,11 +113,11 @@ class MatchDAdmin(admin.ModelAdmin):
 admin.site.register(Hostel,HostelAdmin)
 admin.site.register(Format,FormatAdmin)
 admin.site.register(Sport,SportAdmin)
-admin.site.register(MatchA,MatchAAdmin)
-admin.site.register(MatchD,MatchDAdmin)
 admin.site.register(Stage,StageAdmin)
 admin.site.register(Point,PointAdmin)
 admin.site.register(Score,ScoreAdmin)
+admin.site.register(MatchA,MatchAAdmin)
+admin.site.register(MatchD,MatchDAdmin)
 admin.site.register(Match_set,MatchSetAdmin)
 admin.site.register(MatchB,MatchBAdmin)
 admin.site.register(MatchC,MatchCAdmin)
