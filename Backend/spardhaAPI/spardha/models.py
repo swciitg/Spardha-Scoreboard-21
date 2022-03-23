@@ -14,6 +14,7 @@ class Hostel(models.Model):
     def __str__(self):
         return self.name
 
+
 class Format(models.Model):
     format = models.CharField(max_length=10,
     help_text="A - Football, Hockey, Cricket, Khokho, Basketball, Water Polo.  B - Lawn Tennis, Volleyball. C - Badminton, Table Tennis, Squash. D - Rest everything")
@@ -94,6 +95,15 @@ class Point(models.Model):
 
     def __str__(self):
         return self.sport.name+" ( "+self.hostel.name+" ) "
+
+    def save(self, *args, **kwargs):
+        super(Point, self).save(*args, **kwargs)
+        total_score = 0
+        for point in Point.objects.all().filter(hostel=self.hostel):
+            total_score = total_score + point.points
+        self.hostel.overall_points = total_score
+        self.hostel.save()
+
 
 class Score(models.Model):
     hostel = models.ForeignKey("Hostel", related_name="hostel", on_delete=models.CASCADE,null= True)

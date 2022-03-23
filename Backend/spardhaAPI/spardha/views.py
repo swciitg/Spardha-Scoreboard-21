@@ -13,21 +13,21 @@ class OverallStandingsAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         try:
-            girls_hostels = Hostel.objects.all().filter(type="Girls").order_by('-overall_points')
-            boys_hostels = Hostel.objects.all().filter(type="Boys").order_by('-overall_points')
+            girls_hostels = Hostel.objects.all().filter(type=2).order_by('-overall_points')
+            boys_hostels = Hostel.objects.all().filter(type=1).order_by('-overall_points')
             data = {}
             data["boys"] = []
             data["girls"] = []
             for hostel in boys_hostels:
-                hostel_data = HostelSerializer(hostel)
+                hostel_data = HostelSerializer(hostel).data
                 data["boys"].append(hostel_data)
             
             for hostel in girls_hostels:
-                hostel_data = HostelSerializer(hostel)
+                hostel_data = HostelSerializer(hostel).data
                 data["girls"].append(hostel_data)
             return response.Response(data,status=status.HTTP_200_OK)
         except Exception as e:
-            return response.Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return response.Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class MatchList(ListAPIView):
 
@@ -42,12 +42,15 @@ class MatchList(ListAPIView):
         def sorthelper(e):
             return e["date"]+"Z"+e["time"]
         try:
-            match1v1=[]
-            matchall = []
-            match_list = []
+            matchA=[]
+            matchB = []
+            matchC = []
+            matchD = []
             if hostel is None and sport is None:
-                match1v1 = MatchA.objects.all()
-                matchall = MatchD.objects.all()
+                matchA = MatchA.objects.all()
+                matchB = MatchB.objects.all()
+                # matchC = MatchC.objects.all()
+                matchD = MatchD.objects.all()
                 # print(h in matchall[0].hostels.all())
             elif sport is None:
                 h = Hostel.objects.get(id=hostel)
@@ -75,7 +78,7 @@ class MatchList(ListAPIView):
         except:
             return response.Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-class StandingsAPIView(ListCreateAPIView):
+class StandingsAPIView(ListAPIView):
     serializer_class = StandingSerializer
     queryset = Point.objects.all()
     filterset_fields = ['sport']
@@ -94,7 +97,7 @@ class MatchAPIView(ListCreateAPIView):
     search_fields = ['team1__name','team2__name','sport__name']
 
 
-class MatchAllAPIView(ListCreateAPIView):
+class MatchAllAPIView(ListAPIView):
     serializer_class = MatchAllSerializer
     queryset = MatchD.objects.all()
     filterset_fields = ['id','status','hostels','sport','date']
@@ -104,11 +107,11 @@ class MatchAllAPIView(ListCreateAPIView):
     search_fields = ['team1__name','team2__name','sport__name']
 
 
-class HostelAPIView(ListCreateAPIView):
+class HostelAPIView(ListAPIView):
     serializer_class = HostelSerializer
     queryset = Hostel.objects.all().order_by('name')
 
-class SportAPIView(ListCreateAPIView):
+class SportAPIView(ListAPIView):
     serializer_class = SportSerializer
     queryset = Sport.objects.all()
     filterset_fields = ['name']
