@@ -26,7 +26,6 @@ class PointInline(admin.StackedInline):
             'fields': ('sport',('hostel','points'),)
         }),
     )
-
 class SportAdmin(admin.ModelAdmin):
     list_display = ['name','format']
     list_filter = ['format']
@@ -55,19 +54,57 @@ class MatchAAdmin(admin.ModelAdmin):
 
 class GameInline(admin.StackedInline):
     model = Game
+class MatchBAdmin(admin.ModelAdmin):
+    inlines = (GameInline, )
+    list_display = ['name','sport','stage','date','time','status',]
+    list_filter = ['status','sport','stage','team1','team2',]
+    ordering = ['-date']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "sport":
+            kwargs["queryset"] = Sport.objects.filter(format=2)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 class SetInline(admin.StackedInline):
     model = Set
+    fieldsets = (
+        (None, {
+            'fields': ('name',('score_team1_game1','score_team1_game2','score_team1_game3','score_team1_game4','score_team1_game5',),('score_team2_game1','score_team2_game2','score_team2_game3','score_team2_game4','score_team2_game5',))
+        }),
+    )
+class MatchCAdmin(admin.ModelAdmin):
+    inlines = (SetInline, )
+    list_display = ['name','sport','stage','date','time','status',]
+    list_filter = ['status','sport','stage','team1','team2',]
+    ordering = ['-date']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "sport":
+            kwargs["queryset"] = Sport.objects.filter(format=3)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
+class ScoreInline(admin.StackedInline):
+    model = Score
+    fieldsets = (
+        (None, {
+            'fields': ('match',('hostel','score'),)
+        }),
+    )
+class MatchDAdmin(admin.ModelAdmin):
+    list_display = ['sport','round', 'date','time','status']
+    list_filter = ['status','sport','round']
+    ordering = ['date']
+    inlines = (ScoreInline, )
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "sport":
+            kwargs["queryset"] = Sport.objects.filter(format=4)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 class ScoreAdmin(admin.ModelAdmin):
     list_display = ['match','hostel','score']
     ordering = ['match']
-
-class MatchBAdmin(admin.ModelAdmin):
-    inlines = (GameInline, )
-
-class MatchCAdmin(admin.ModelAdmin):
-    inlines = (SetInline, )
 
 
 class MatchSetAdmin(admin.ModelAdmin):
@@ -75,58 +112,9 @@ class MatchSetAdmin(admin.ModelAdmin):
     list_filter = ['status','sport','team1','team2',]
     ordering = ['date']
 
-class MatchAllForm(forms.ModelForm):
 
-    class Meta:
-        model = MatchD
-        exclude = []
-    def __init__(self, *args, **kwargs):
-        # print("Called")
-        super().__init__(*args, **kwargs)
-        for hostel in Hostel.objects.all():
-            if hostel in self.instance.hostels.all():
-                try:
-                    score = Score.objects.get(hostel = hostel, match=self.instance).score
-                except:
-                    scoreObj = Score.objects.create(hostel = hostel, match = self.instance, score = 0)
-                    scoreObj.save()
-                    score = scoreObj.score
-            else:
-                score = "NIL"
-            if score == "NIL":
-                self.base_fields[hostel.name] = forms.CharField(initial=score,disabled=True)
-                self.fields[hostel.name] = forms.CharField(initial=score,disabled=True)
-            else:
-                self.base_fields[hostel.name] = forms.CharField(initial=score)
-                self.fields[hostel.name] = forms.CharField(initial=score)
-
-
-    def save(self, *args, **kwargs):
-        # print(self.cleaned_data)
-        for hostel in self.instance.hostels.all():
-            score = Score.objects.get(hostel=hostel,match=self.instance)
-            score.score = self.cleaned_data[hostel.name]
-            score.save()
-        return super().save(*args, **kwargs)
-
-class MatchDAdmin(admin.ModelAdmin):
-    list_display = ['sport','round', 'date','time','status']
-    list_filter = ['status','sport','round']
-    ordering = ['date']
-    customChangeForm = MatchAllForm
-    # formfield_overrides = {
-    #     JSONField: {'widget': PrettyJSONWidget}
-    # }
-    def get_form(self, request, obj=None, **kwargs):
-        """
-        Use special form during foo creation
-        """
-        if obj is not None:
-            return MatchAllForm
-        return super().get_form(request, obj, **kwargs)
 
 admin.site.register(Hostel,HostelAdmin)
-# admin.site.register(Format,FormatAdmin)
 admin.site.register(Sport,SportAdmin)
 admin.site.register(Stage,StageAdmin)
 admin.site.register(Point,PointAdmin)
