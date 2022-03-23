@@ -7,9 +7,27 @@ from django.db.models import Q
 
 # Create your views here.
 
-class OverallStandingsAPIView(ListCreateAPIView):
+class OverallStandingsAPIView(ListAPIView):
     serializer_class = HostelSerializer
     queryset = Hostel.objects.all().order_by('-overall_points')
+
+    def get(self, request, *args, **kwargs):
+        try:
+            girls_hostels = Hostel.objects.all().filter(type="Girls").order_by('-overall_points')
+            boys_hostels = Hostel.objects.all().filter(type="Boys").order_by('-overall_points')
+            data = {}
+            data["boys"] = []
+            data["girls"] = []
+            for hostel in boys_hostels:
+                hostel_data = HostelSerializer(hostel)
+                data["boys"].append(hostel_data)
+            
+            for hostel in girls_hostels:
+                hostel_data = HostelSerializer(hostel)
+                data["girls"].append(hostel_data)
+            return response.Response(data,status=status.HTTP_200_OK)
+        except Exception as e:
+            return response.Response({"error":"something went wrong"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class MatchList(ListAPIView):
 
