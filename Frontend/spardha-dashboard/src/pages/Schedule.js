@@ -6,6 +6,7 @@ import CardA from './components/CardA';
 import CardB from './components/CardB';
 import CardC from './components/CardC';
 import CardD from './components/CardD';
+import Footer from './components/Footer';
 
 const Schedule = (props) => {
   // const [date, setDate] = useState(new Date());
@@ -43,10 +44,20 @@ const Schedule = (props) => {
     console.log('triggered');
     setLoading(true);
     console.log(selectedHostel);
+    var matchesApiURLnew = matchesApiURL;
+    if (selectedHostel !== '') {
+      matchesApiURLnew = matchesApiURLnew + '?hostel=' + selectedHostel;
+    }
+    if(selectedSport !== ''){
+      if(selectedHostel !== ''){
+        matchesApiURLnew = matchesApiURLnew + '&sport=' + selectedSport;
+      }
+      else{
+        matchesApiURLnew = matchesApiURLnew + '?sport=' + selectedSport;
+      }
+    }
     console.log(selectedSport);
-    axios.get(
-          matchesApiURL
-        )
+    axios.get(matchesApiURLnew)
         .then((response) => {
           console.log(response.data);
           setMatches(response.data.data);
@@ -102,6 +113,7 @@ const Schedule = (props) => {
         }[match.type]
       ))
       )} 
+      <Footer />
     </div>
   );
 };

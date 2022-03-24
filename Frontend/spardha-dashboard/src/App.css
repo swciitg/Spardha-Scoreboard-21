@@ -45,7 +45,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   color: #000000;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   letter-spacing: 0.115rem;
   margin-right: 10%;
@@ -56,11 +56,12 @@
   font-size: 0.7rem;
   font-weight: 500;
   color: #000000;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   letter-spacing: 0.115rem;
   border: none;
   width: 50%;
+  background-color: #ffffff;
 }
 
 .results_dropdown_date {
@@ -68,7 +69,7 @@
   font-size: 0.7rem;
   font-weight: 500;
   color: #000000;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   letter-spacing: 0.115rem;
   border: none;
@@ -90,7 +91,6 @@
   height: 1.6rem;
   width: 1.6rem;
   border-radius: 50%;
-  background-color: #e2e2e2;
   margin-right: 0.5rem;
 }
 
@@ -110,21 +110,43 @@
 }
 
 .top_header {
-  padding: 0.4rem 0rem 0rem 0rem;
-  font-size: 0.6rem;
+  padding: 1rem 0rem 1rem 0rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.placeholder_header {
+  height: 1rem;
+}
+
+.bot_footer {
+  padding: 0.4rem 0rem 0.4rem 0rem;
+  font-size: 0.9rem;
 }
 
 .top_header_logo {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2rem;
+  width: 2rem;
   margin-right: 0.5rem;
 }
 
+.footer_logo {
+  height: 1.4rem;
+  width: 1.4rem;
+  margin-right: 0.3rem;
+}
+
 .top_header_title {
-  letter-spacing: 0.115rem;
+  letter-spacing: 0.112rem;
   font-family: "Raleway", sans-serif;
-  font-weight: 400;
-  color: #000000;
+  font-weight: 500;
+  color: #1e2532;
+}
+
+.footer_title {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 500;
+  color: #9ea2a7;
 }
 
 .standings_header {
@@ -157,6 +179,7 @@
 .standings_dropdown {
   flex: 1;
   border: none;
+  background-color: #fff;
 }
 
 .standings_dropdown:focus {
@@ -177,18 +200,25 @@
 }
 
 .gold_circle {
+  background-image: none;
   background-color: #ffd584;
   text-align: center;
 }
 
 .silver_circle {
+  background-image: none;
   background-color: #c6d0e5;
   text-align: center;
 }
 
 .bronze_circle {
+  background-image: none;
   background-color: #f4ba9a;
   text-align: center;
+}
+
+.blank_circle {
+  background-image: url("https://picsum.photos/200");
 }
 
 .vs_text {
@@ -271,10 +301,19 @@
   margin-bottom: 4rem;
 }
 
+.fixed_footer {
+  margin-bottom: 4rem;
+  padding-bottom: 0.5rem;
+}
+
 .set_heading {
   font-family: "Red Hat Display", sans-serif;
   font-weight: 500;
   color: #384558;
   font-size: 1rem;
   padding-bottom: 0.5rem;
+}
+
+.first_filter {
+  margin-right: 1rem;
 }

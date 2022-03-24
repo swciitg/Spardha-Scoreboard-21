@@ -2,6 +2,7 @@ import StandingsItem from './components/StandingsItem';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
+import Footer from './components/Footer';
 
 const Standings = (props) => {
   const baseApiURL = 'https://swc.iitg.ac.in/spardhaApi/';
@@ -89,8 +90,6 @@ const Standings = (props) => {
               </option>
             ))}
         </select>
-        {/*  <div className="standings_dropdown_text">Overall</div>
-            <FontAwesomeIcon icon={faCaretDown} className="standings_dropdown_icon" size="l"/> */}
       </div>
       <div className='w-100 black_line' />
       <div className='standings_h2'>TABULAR FORM</div>
@@ -124,10 +123,9 @@ const Standings = (props) => {
           />
         ))
       )}
-
-      {/* {data.map((hostel, i) =>(
-            <StandingsItem Name={hostel.name} Points={hostel.points} Index={i}/>
-        ))} */}
+      <div className="fixed-bottom fixed_footer">
+        <Footer />
+      </div>
     </div>
   );
 };
