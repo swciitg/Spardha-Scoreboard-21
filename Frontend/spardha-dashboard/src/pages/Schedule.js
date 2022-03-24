@@ -4,6 +4,8 @@ import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import CardA from './components/CardA';
 import CardB from './components/CardB';
+import CardC from './components/CardC';
+import CardD from './components/CardD';
 
 const Schedule = (props) => {
   // const [date, setDate] = useState(new Date());
@@ -92,9 +94,12 @@ const Schedule = (props) => {
       {loading ? (
         <p>Loading...</p>
       ) : (matches.map((match, i) => (
-        
-        match.type === 'all' ? 
-          match.status === false && <CardB {...match} result = {false}/> : match.status === false && <CardA {...match} result={false}/>
+        {
+          'A': match.status === false && <CardA {...match} result={false}/>,
+          'B': match.status === false && <CardB {...match} result={false}/>,
+          'C': match.status === false && <CardC {...match} result={false}/>,
+          'D': match.status === false && <CardD {...match} result={false}/>
+        }[match.type]
       ))
       )} 
     </div>
