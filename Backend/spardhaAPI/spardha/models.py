@@ -1,3 +1,5 @@
+from contextlib import nullcontext
+from email.policy import default
 from pydoc import classname
 from pyexpat import model
 from random import choices
@@ -13,6 +15,7 @@ class Hostel(models.Model):
     name = models.CharField(max_length=100)
     overall_points = models.IntegerField(default=0)
     type = models.IntegerField(choices=CHOICES,null=True)
+    logo = models.ImageField(upload_to='logos',null=True,blank=True)
 
     def __str__(self):
         return self.name
