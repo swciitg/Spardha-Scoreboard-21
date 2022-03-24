@@ -1,62 +1,7 @@
 import StandingsItem from './components/StandingsItem';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
-const data = [
-  {
-    name: 'Brahmaputra',
-    points: 800,
-  },
-  {
-    name: 'Lohit',
-    points: 700,
-  },
-  {
-    name: 'Siang',
-    points: 700,
-  },
-  {
-    name: 'Manas',
-    points: 600,
-  },
-  {
-    name: 'Kapili',
-    points: 500,
-  },
-  {
-    name: 'Disang',
-    points: 400,
-  },
-];
-
-const sport = [
-  {
-    name: 'Cricket',
-  },
-  {
-    name: 'Basketball',
-  },
-  {
-    name: 'Volleyball',
-  },
-  {
-    name: 'Badminton',
-  },
-  {
-    name: 'Football',
-  },
-  {
-    name: 'Hockey',
-  },
-  {
-    name: 'Chess',
-  },
-  {
-    name: 'Squash',
-  },
-];
 
 const Standings = (props) => {
   const baseApiURL = 'https://swc.iitg.ac.in/spardhaApi/';
@@ -157,6 +102,7 @@ const Standings = (props) => {
             Name={hostel.name}
             Points={hostel.overall_points}
             Index={i}
+            Result={true}
           />
         ))
       ) : selectedSport === '-2' ? (
@@ -165,6 +111,7 @@ const Standings = (props) => {
             Name={hostel.name}
             Points={hostel.overall_points}
             Index={i}
+            Result={true}
           />
         ))
       ) : (
@@ -173,6 +120,7 @@ const Standings = (props) => {
             Name={hostel.hostel}
             Points={hostel.points}
             Index={i}
+            Result={true}
           />
         ))
       )}
