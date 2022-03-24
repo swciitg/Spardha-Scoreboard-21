@@ -243,7 +243,6 @@
   font-weight: 700;
   color: #cad1e2;
   font-size: 1.2rem;
-  margin-right: 1rem;
 }
 
 .result_stage {
@@ -264,6 +263,18 @@
   padding-bottom: 0.2rem;
 }
 
+.loser_div {
+  margin-right: 0.4rem;
+}
+
 .results {
   margin-bottom: 4rem;
+}
+
+.set_heading {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 500;
+  color: #384558;
+  font-size: 1rem;
+  padding-bottom: 0.5rem;
 }

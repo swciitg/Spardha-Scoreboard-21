@@ -8,6 +8,8 @@ class HostelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SportSerializer(serializers.ModelSerializer):
+    # format = serializers.SlugRelatedField(read_only=True,slug_field='format')
+    
     class Meta:
         model = Sport
         fields = '__all__'
