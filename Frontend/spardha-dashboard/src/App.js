@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Standings from './pages/Standings';
 import Results from './pages/Results';
 import Schedule from './pages/Schedule';
@@ -14,6 +14,9 @@ function App() {
         <Header />
         <Navigation />
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/standings" />
+          </Route>
           <Route path="/standings" component={Standings} />
           <Route path="/results" component={Results} />
           <Route path="/schedule" component={Schedule} />

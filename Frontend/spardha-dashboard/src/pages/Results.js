@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import ResultA from './components/ResultA';
-import ResultB from './components/ResultB';
+import CardA from './components/CardA';
+import CardB from './components/CardB';
 
 const Results = (props) => {
   // const [date, setDate] = useState(new Date());
@@ -94,7 +94,7 @@ const Results = (props) => {
       ) : (matches.map((match, i) => (
         
         match.type === 'all' ? 
-          match.status === true && <ResultB {...match}/> : match.status === true && <ResultA {...match}/>
+          match.status === true && <CardB {...match} result={true}/> : match.status === true && <CardA {...match} result={true}/>
       ))
       )} 
     </div>

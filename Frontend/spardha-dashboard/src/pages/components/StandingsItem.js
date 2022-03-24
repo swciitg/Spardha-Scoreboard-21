@@ -21,9 +21,13 @@ const StandingsItem = (props) => {
   }
 return (
     <div className="standings_item align-items-center">
-        {circle}
+        {props.Result ? 
+        circle :
+        <div className="standings_item_circle"></div>}
         <div className="standings_item_name">{props.Name}</div>
+        {props.Result && 
         <div className="standings_item_points">{props.Points}</div>
+        }
     </div>
   )
 };
