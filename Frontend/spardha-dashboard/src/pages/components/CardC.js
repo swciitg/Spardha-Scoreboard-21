@@ -30,7 +30,7 @@ return (
                 <div className="set_heading">{set.name}</div>
                 <div className="d-flex flex-row justify-content-between result_list_item">
                     <div className="result_hostel d-flex flex-row align-items-center">
-                        <div className="standings_item_circle blank_circle"></div>
+                        <div className="standings_item_circle blank_circle" style={{backgroundImage: `url(${team1_winner ? props.image1 : props.image2})`}}></div>
                         <div className="standings_item_name">{team1_winner ? props.team1 : props.team2}</div>
                     </div>
                     {props.result && 
@@ -45,7 +45,7 @@ return (
                 </div>
                 <div className="d-flex flex-row justify-content-between result_list_item">
                     <div className="result_hostel d-flex flex-row align-items-center">
-                        <div className="standings_item_circle blank_circle"></div>
+                        <div className="standings_item_circle blank_circle" style={{backgroundImage: `url(${team1_winner ? props.image2 : props.image1})`}}></div>
                         <div className="standings_item_name">{team1_winner ? props.team2 : props.team1}</div>
                     </div>
                     {props.result && 
@@ -62,7 +62,7 @@ return (
         ))}
         
         <div className="d-flex flex-row justify-content-between align-items-center">
-            <div className="result_stage">Stage {props.stage}</div>
+            <div className="result_stage">{props.stage}</div>
             {props.result && 
             <div className="result_final_text">{team1_winner ? props.team1 : props.team2} won</div>
             }

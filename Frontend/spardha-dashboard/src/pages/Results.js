@@ -106,10 +106,10 @@ const Results = (props) => {
         <p>Loading...</p>
       ) : (matches.map((match, i) => (
         {
-          'A': match.status === true && <CardA {...match} result={true}/>,
-          'B': match.status === true && <CardB {...match} result={true}/>,
-          'C': match.status === true && <CardC {...match} result={true}/>,
-          'D': match.status === true && <CardD {...match} result={true}/>
+          'A': match.status === true && <CardA {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
+          'B': match.status === true && <CardB {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
+          'C': match.status === true && <CardC {...match} result={true} hostels={hostels}/>,
+          'D': match.status === true && <CardD {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>
         }[match.type]
       ))
       )} 

@@ -88,7 +88,7 @@ const Schedule = (props) => {
               onChange={(date) => setDate(date)}
             />
           </div> */}
-          <select onChange={handleSportChange} className='results_dropdown w-2' name='' id=''>
+          <select onChange={handleSportChange} className='results_dropdown w-2 first_filter' name='' id=''>
             <option value=''>SPORT</option>
             {sports.map((sport, i) => (
               <option value={sport.id}>{sport.name}</option>
@@ -104,12 +104,12 @@ const Schedule = (props) => {
       </div>
       {loading ? (
         <p>Loading...</p>
-      ) : (matches.map((match, i) => (
+      ) : (matches.slice(0).reverse().map((match, i) => (
         {
-          'A': match.status === false && <CardA {...match} result={false}/>,
-          'B': match.status === false && <CardB {...match} result={false}/>,
-          'C': match.status === false && <CardC {...match} result={false}/>,
-          'D': match.status === false && <CardD {...match} result={false}/>
+          'A': match.status === false && <CardA {...match} result={false} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
+          'B': match.status === false && <CardB {...match} result={false} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
+          'C': match.status === false && <CardC {...match} result={false} hostels={hostels}/>,
+          'D': match.status === false && <CardD {...match} result={false} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>
         }[match.type]
       ))
       )} 

@@ -91,7 +91,7 @@ const Standings = (props) => {
             ))}
         </select>
       </div>
-      <div className='w-100 black_line' />
+      {/* <div className='w-100 black_line' /> */}
       <div className='standings_h2'>TABULAR FORM</div>
       {loading ? (
         <p>Loading...</p>
@@ -102,6 +102,7 @@ const Standings = (props) => {
             Points={hostel.overall_points}
             Index={i}
             Result={true}
+            Image={hostels.find(o => o.name === hostel.name)['logo']}
           />
         ))
       ) : selectedSport === '-2' ? (
@@ -111,6 +112,7 @@ const Standings = (props) => {
             Points={hostel.overall_points}
             Index={i}
             Result={true}
+            Image={hostels.find(o => o.name === hostel.name)['logo']}
           />
         ))
       ) : (
@@ -120,6 +122,7 @@ const Standings = (props) => {
             Points={hostel.points}
             Index={i}
             Result={true}
+            Image={hostels.find(o => o.name === hostel.name)['logo']}
           />
         ))
       )}

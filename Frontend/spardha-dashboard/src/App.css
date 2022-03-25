@@ -113,6 +113,7 @@
   padding: 1rem 0rem 1rem 0rem;
   font-size: 1rem;
   margin-bottom: 1rem;
+  background-color: #ffffff88;
 }
 
 .placeholder_header {
@@ -155,6 +156,11 @@
   font-weight: 700;
   margin-top: 1.5rem;
   letter-spacing: 0.03rem;
+  width: 100%;
+  border-top: 0.5px solid #e9e9eb;
+  border-bottom: 0.5px solid #e9e9eb;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .results_header {
@@ -188,7 +194,7 @@
 
 .standings_dropdown_text {
   font-weight: 300;
-
+  font-size: 1.2rem;
   text-align: right;
   padding-right: 0.5rem;
 }
@@ -218,7 +224,10 @@
 }
 
 .blank_circle {
-  background-image: url("https://picsum.photos/200");
+  /*  background-image: url("https://picsum.photos/200"); */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .vs_text {
