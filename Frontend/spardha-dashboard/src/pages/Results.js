@@ -6,6 +6,7 @@ import CardA from './components/CardA';
 import CardB from './components/CardB';
 import CardC from './components/CardC';
 import CardD from './components/CardD';
+import Footer from './components/Footer';
 
 const Results = (props) => {
   // const [date, setDate] = useState(new Date());
@@ -43,10 +44,20 @@ const Results = (props) => {
     console.log('triggered');
     setLoading(true);
     console.log(selectedHostel);
+    var matchesApiURLnew = matchesApiURL;
+    if (selectedHostel !== '') {
+      matchesApiURLnew = matchesApiURLnew + '?hostel=' + selectedHostel;
+    }
+    if(selectedSport !== ''){
+      if(selectedHostel !== ''){
+        matchesApiURLnew = matchesApiURLnew + '&sport=' + selectedSport;
+      }
+      else{
+        matchesApiURLnew = matchesApiURLnew + '?sport=' + selectedSport;
+      }
+    }
     console.log(selectedSport);
-    axios.get(
-          matchesApiURL
-        )
+    axios.get(matchesApiURLnew)
         .then((response) => {
           console.log(response.data);
           setMatches(response.data.data);
@@ -77,7 +88,7 @@ const Results = (props) => {
               onChange={(date) => setDate(date)}
             />
           </div> */}
-          <select onChange={handleSportChange} className='results_dropdown w-2' name='' id=''>
+          <select onChange={handleSportChange} className='results_dropdown w-2 first_filter' name='' id=''>
             <option value=''>SPORT</option>
             {sports.map((sport, i) => (
               <option value={sport.id}>{sport.name}</option>
@@ -102,7 +113,10 @@ const Results = (props) => {
         }[match.type]
       ))
       )} 
+      <Footer />
     </div>
+
+    
   );
 };
 

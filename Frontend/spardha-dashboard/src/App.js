@@ -12,6 +12,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Header />
+        <div className="placeholder_header"></div>
         <Navigation />
         <Switch>
           <Route exact path="/">

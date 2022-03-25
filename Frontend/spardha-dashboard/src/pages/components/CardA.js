@@ -10,20 +10,8 @@ const ResultA = (props) => {
 
     var time = toDateWithOutTimeZone(props.time);
 
-    var winner_team = props.team1;
-    var loser_team = props.team2;
-    var winner_team_text = '1';
-    var loser_team_text = '2';
-    var winner_team_score = props.score1;
-    var loser_team_score = props.score2;
     var team1_winner = true;
-    if(props.result && props.winner === 2){
-        winner_team = props.team2;
-        loser_team = props.team1;
-        winner_team_text = '2';
-        loser_team_text = '1';
-        team1_winner = false;
-    }
+    if(props.result && props.winner === 2){team1_winner = false;}
 
     
 
@@ -36,7 +24,7 @@ return (
         <div className="result_details">
             <div className="d-flex flex-row justify-content-between result_list_item">
                 <div className="result_hostel d-flex flex-row align-items-center">
-                    <div className="standings_item_circle"></div>
+                    <div className="standings_item_circle blank_circle"></div>
                     <div className="standings_item_name">{team1_winner ? props.team1 : props.team2}</div>
                 </div>
                 {props.result && 
@@ -47,7 +35,7 @@ return (
             </div>
             <div className="d-flex flex-row justify-content-between result_list_item">
                 <div className="result_hostel d-flex flex-row align-items-center">
-                    <div className="standings_item_circle"></div>
+                    <div className="standings_item_circle blank_circle"></div>
                     <div className="standings_item_name">{team1_winner ? props.team2 : props.team1}</div>
                 </div>
                 {props.result && 
