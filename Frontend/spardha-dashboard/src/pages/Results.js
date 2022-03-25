@@ -108,8 +108,8 @@ const Results = (props) => {
         {
           'A': match.status === true && <CardA {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
           'B': match.status === true && <CardB {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
-          'C': match.status === true && <CardC {...match} result={true} hostels={hostels}/>,
-          'D': match.status === true && <CardD {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>
+          'C': match.status === true && <CardC {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
+          'D': match.status === true && <CardD {...match} result={true} hostels={hostels}/>
         }[match.type]
       ))
       )} 
