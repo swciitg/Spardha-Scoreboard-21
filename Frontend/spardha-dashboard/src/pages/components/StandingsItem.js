@@ -23,7 +23,7 @@ return (
     <div className="standings_item align-items-center">
         {props.Result ? 
         circle :
-        <div className="standings_item_circle blank_circle">33</div>
+        <div className="standings_item_circle blank_circle"></div>
         }
         <div className="standings_item_name">{props.Name}</div>
         {props.Result && 
