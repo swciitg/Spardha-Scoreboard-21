@@ -10,7 +10,7 @@ import Header from './Header';
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename="/spardha">
         <Header />
         <div className="placeholder_header"></div>
         <Navigation />
