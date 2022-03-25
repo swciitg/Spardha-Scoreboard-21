@@ -25,7 +25,7 @@ const Schedule = (props) => {
   useEffect(() => {
     setLoading(true);
     axios.get(hostelApiURL).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setHostels(response.data);
       setLoading(false);
     });
@@ -34,16 +34,16 @@ const Schedule = (props) => {
   useEffect(() => {
     setLoading(true);
     axios.get(sportApiURL).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setSports(response.data);
       setLoading(false);
     });
   }, [sportApiURL]);
 
   useEffect(() => {
-    console.log('triggered');
+    // console.log('triggered');
     setLoading(true);
-    console.log(selectedHostel);
+    // console.log(selectedHostel);
     var matchesApiURLnew = matchesApiURL;
     if (selectedHostel !== '') {
       matchesApiURLnew = matchesApiURLnew + '?hostel=' + selectedHostel;
@@ -56,10 +56,10 @@ const Schedule = (props) => {
         matchesApiURLnew = matchesApiURLnew + '?sport=' + selectedSport;
       }
     }
-    console.log(selectedSport);
+    // console.log(selectedSport);
     axios.get(matchesApiURLnew)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setMatches(response.data.data);
           setLoading(false);
         });

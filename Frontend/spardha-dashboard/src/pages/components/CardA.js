@@ -13,7 +13,7 @@ const ResultA = (props) => {
     var team1_winner = true;
     if(props.result && props.winner === 2){team1_winner = false;}
 
-    console.log(props.image1);
+    // console.log(props.image1);
 
     
 
