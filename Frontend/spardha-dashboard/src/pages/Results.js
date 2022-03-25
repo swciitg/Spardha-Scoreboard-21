@@ -106,9 +106,9 @@ const Results = (props) => {
         <p>Loading...</p>
       ) : (matches.map((match, i) => (
         {
-          'A': match.status === true && <CardA {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
-          'B': match.status === true && <CardB {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
-          'C': match.status === true && <CardC {...match} result={true} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
+          'A': match.status === true && <CardA {...match} result={true} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
+          'B': match.status === true && <CardB {...match} result={true} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
+          'C': match.status === true && <CardC {...match} result={true} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
           'D': match.status === true && <CardD {...match} result={true} hostels={hostels}/>
         }[match.type]
       ))
