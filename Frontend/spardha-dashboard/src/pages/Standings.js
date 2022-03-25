@@ -91,7 +91,7 @@ const Standings = (props) => {
             ))}
         </select>
       </div>
-      <div className='w-100 black_line' />
+      {/* <div className='w-100 black_line' /> */}
       <div className='standings_h2'>TABULAR FORM</div>
       {loading ? (
         <p>Loading...</p>
