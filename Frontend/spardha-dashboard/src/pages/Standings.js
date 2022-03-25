@@ -68,7 +68,7 @@ const Standings = (props) => {
   };
 
   return (
-    <div className='p-4'>
+    <div className='p-4 standings'>
       <div className='standings_header d-flex flex-row align-items-center'>
         <div className='standings_text'>STANDINGS</div>
         <select

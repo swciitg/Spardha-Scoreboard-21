@@ -113,7 +113,7 @@
   padding: 1rem 0rem 1rem 0rem;
   font-size: 1rem;
   margin-bottom: 1rem;
-  background-color: #ffffff88;
+  background-color: #ffffff;
 }
 
 .placeholder_header {
@@ -123,6 +123,7 @@
 .bot_footer {
   padding: 0.4rem 0rem 0.4rem 0rem;
   font-size: 0.9rem;
+  background-color: #fff;
 }
 
 .top_header_logo {
@@ -312,7 +313,9 @@
 
 .fixed_footer {
   margin-bottom: 4rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.2rem;
+  padding-top: 0.2rem;
+  background-color: #fff;
 }
 
 .set_heading {
@@ -325,4 +328,8 @@
 
 .first_filter {
   margin-right: 1rem;
+}
+
+.standings {
+  margin-bottom: 5rem;
 }
