@@ -26,7 +26,7 @@ class MatchASerializer(serializers.ModelSerializer):
     team1 = serializers.SlugRelatedField(read_only=True,slug_field='name')
     team2 = serializers.SlugRelatedField(read_only=True,slug_field='name')
     sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
-
+    stage = serializers.SlugRelatedField(read_only=True,slug_field='stage')
     class Meta:
         model = MatchA
         fields = ['team1','team2','sport','date','time','status','score1','score2','stage','winner']
@@ -40,6 +40,7 @@ class MatchBSerializer(serializers.ModelSerializer):
     team2 = serializers.SlugRelatedField(read_only=True,slug_field='name')
     sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
     scores = GameSerializer(source = "game_set",many = True)
+    stage = serializers.SlugRelatedField(read_only=True,slug_field='stage')
     class Meta:
         model = MatchB
         fields = ['team1','team2','sport','date','time','status','stage','scores','winner']
@@ -53,6 +54,7 @@ class MatchCSerializer(serializers.ModelSerializer):
     team2 = serializers.SlugRelatedField(read_only=True,slug_field='name')
     sport = serializers.SlugRelatedField(read_only=True,slug_field='name')
     # sets = SetSerializer(many = True, source="set_set")
+    stage = serializers.SlugRelatedField(read_only=True,slug_field='stage')
     class Meta:
         model = MatchC
         fields = ['team1','team2','sport','date','time','status','stage','winner']

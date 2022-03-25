@@ -82,6 +82,8 @@ class MatchList(ListAPIView):
             matchC = MatchC.objects.all().filter(sport=sport)
             matchD = MatchD.objects.all().filter(sport=sport)
         else:
+            hostel = Hostel.objects.get(id=hostelId)
+            sport = Sport.objects.get(id=sportId)
             matchA = MatchA.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
             matchB = MatchB.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
             matchC = MatchC.objects.all().filter(sport=sport).filter(Q(team1=hostel) | Q(team2=hostel))
