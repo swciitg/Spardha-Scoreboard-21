@@ -62,7 +62,7 @@ return (
         ))}
         
         <div className="d-flex flex-row justify-content-between align-items-center">
-            <div className="result_stage">Stage {props.stage}</div>
+            <div className="result_stage">{props.stage}</div>
             {props.result && 
             <div className="result_final_text">{team1_winner ? props.team1 : props.team2} won</div>
             }

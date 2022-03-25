@@ -104,7 +104,7 @@ const Schedule = (props) => {
       </div>
       {loading ? (
         <p>Loading...</p>
-      ) : (matches.map((match, i) => (
+      ) : (matches.slice(0).reverse().map((match, i) => (
         {
           'A': match.status === false && <CardA {...match} result={false} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
           'B': match.status === false && <CardB {...match} result={false} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
