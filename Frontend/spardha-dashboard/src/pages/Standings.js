@@ -102,6 +102,7 @@ const Standings = (props) => {
             Points={hostel.overall_points}
             Index={i}
             Result={true}
+            Image={hostels.find(o => o.name === hostel.name)['logo']}
           />
         ))
       ) : selectedSport === '-2' ? (
@@ -111,6 +112,7 @@ const Standings = (props) => {
             Points={hostel.overall_points}
             Index={i}
             Result={true}
+            Image={hostels.find(o => o.name === hostel.name)['logo']}
           />
         ))
       ) : (
@@ -120,6 +122,7 @@ const Standings = (props) => {
             Points={hostel.points}
             Index={i}
             Result={true}
+            Image={hostels.find(o => o.name === hostel.name)['logo']}
           />
         ))
       )}

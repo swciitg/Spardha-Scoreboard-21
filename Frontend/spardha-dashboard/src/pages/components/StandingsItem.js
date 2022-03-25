@@ -16,14 +16,14 @@ const StandingsItem = (props) => {
     )
   }else{
     circle = (
-      <div className="standings_item_circle blank_circle"></div>
+      <div className="standings_item_circle blank_circle" style={{backgroundImage: `url(${props.Image})`}}></div>
     )
   }
 return (
     <div className="standings_item align-items-center">
         {props.Result ? 
         circle :
-        <div className="standings_item_circle blank_circle"></div>
+        <div className="standings_item_circle blank_circle" style={{backgroundImage: `url(${props.Image})`}}></div>
         }
         <div className="standings_item_name">{props.Name}</div>
         {props.Result && 

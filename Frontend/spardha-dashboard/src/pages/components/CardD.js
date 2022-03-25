@@ -17,7 +17,7 @@ const ResultB = (props) => {
     var i = 0;
     for (const key in props.scores) {
         console.log(`${key}: ${props.scores[key]}`);
-        standings.push(<StandingsItem Name={key} Points={props.scores[key]} Index={i} Result = {props.result} Image1={props.image1} Image2={props.image2} Images={true}/>)
+        standings.push(<StandingsItem Name={key} Points={props.scores[key]} Index={i} Result = {props.result} Image={props.hostels.find(o => o.name === key)['logo']}/>)
         i++;
     }
 

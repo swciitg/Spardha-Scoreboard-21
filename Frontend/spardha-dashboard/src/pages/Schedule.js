@@ -108,7 +108,7 @@ const Schedule = (props) => {
         {
           'A': match.status === false && <CardA {...match} result={false} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
           'B': match.status === false && <CardB {...match} result={false} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
-          'C': match.status === false && <CardC {...match} result={false} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>,
+          'C': match.status === false && <CardC {...match} result={false} hostels={hostels}/>,
           'D': match.status === false && <CardD {...match} result={false} image1={hostels.find(o => o.name === match.team1)['logo']} image2={hostels.find(o => o.name === match.team2)['logo']}/>
         }[match.type]
       ))
