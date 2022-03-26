@@ -23,7 +23,7 @@ const Standings = (props) => {
   useEffect(() => {
     setLoading(true);
     axios.get(hostelApiURL).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setHostels(response.data);
       setLoading(false);
     });
@@ -32,7 +32,7 @@ const Standings = (props) => {
   useEffect(() => {
     setLoading(true);
     axios.get(sportApiURL).then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       setSports(response.data);
       setLoading(false);
     });
@@ -40,12 +40,12 @@ const Standings = (props) => {
   useEffect(() => {
     console.log('triggered');
     setLoading(true);
-    console.log(selectedSport);
+    // console.log(selectedSport);
     if (selectedSport !== '-1' && selectedSport !== '-2') {
       axios
         .get(standingsApiURL + '?sport=' + selectedSport)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setStandings(response.data);
           setLoading(false);
         });
@@ -55,7 +55,7 @@ const Standings = (props) => {
   useEffect(() => {
     setLoading(true);
     axios.get(overallStandingsApiURL).then((response) => {
-      console.log(response.data.boys);
+      // console.log(response.data.boys);
       setOverallStandings(response.data.boys);
       setOverallStandingsGirls(response.data.girls);
       setLoading(false);
@@ -63,7 +63,7 @@ const Standings = (props) => {
   }, [overallStandingsApiURL]);
 
   const sportHandler = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setSelectedSport(event.target.value);
   };
 
