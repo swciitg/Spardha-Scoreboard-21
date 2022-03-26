@@ -192,8 +192,7 @@
   font-size: 1.2rem;
   text-align-last: right;
   width: 50%;
-  overflow-y: auto;
-  overflow-x: scroll;
+  text-overflow: ellipsis;
 }
 
 .standings_dropdown:focus {
@@ -207,9 +206,6 @@
   padding-right: 0.5rem;
   word-wrap: break-word;
   direction: rtl;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  overflow-x: scroll;
 }
 
 .black_line {
