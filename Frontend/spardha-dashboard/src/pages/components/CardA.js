@@ -12,6 +12,7 @@ const ResultA = (props) => {
 
     var team1_winner = true;
     if(props.result && props.winner === 2){team1_winner = false;}
+    const isTie = props.score1 == props.score2;
 
     // console.log(props.image1);
 
@@ -30,9 +31,9 @@ return (
                     <div className="standings_item_name">{team1_winner ? props.team1 : props.team2}</div>
                 </div>
                 {props.result && 
-                <div className="d-flex flex-row align-items-center">
-                    <div className="result_score_winner standings_item_name">{team1_winner ? props.score1 : props.score2}</div>
-                    <img src="./left_arrow.png" alt="arrow" className="arrow_img" />
+                <div className={"d-flex flex-row align-items-center"+(isTie?" loser_div":"")}>
+                    <div className={isTie?"result_score_loser standings_item_name" :"result_score_winner standings_item_name"}>{team1_winner ? props.score1 : props.score2}</div>
+			{!isTie &&<img src="./left_arrow.png" alt="arrow" className="arrow_img" /> }
                 </div>}
             </div>
             <div className="d-flex flex-row justify-content-between result_list_item">
@@ -50,9 +51,10 @@ return (
         </div>
         <div className="d-flex flex-row justify-content-between align-items-center">
             <div className="result_stage">{props.stage}</div>
-            {props.result && 
+            {props.result && !isTie && 
             <div className="result_final_text">{team1_winner ? props.team1 : props.team2} won</div>
             }
+            {props.result && isTie && <div className="result_final_text">Tie</div>}
         </div>
     </div>
   )
