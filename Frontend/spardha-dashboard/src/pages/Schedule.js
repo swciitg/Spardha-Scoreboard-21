@@ -9,6 +9,14 @@ import CardD from './components/CardD';
 import Footer from './components/Footer';
 import LoadingMask from 'react-loadingmask';
 import 'react-loadingmask/dist/react-loadingmask.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+const Spin = (
+  <i
+    className='fa-solid fa-spinner'
+    style={{ color: 'black' }}
+  />
+);
+
 
 const Schedule = (props) => {
   // const [date, setDate] = useState(new Date());
@@ -115,7 +123,12 @@ const Schedule = (props) => {
         </div>
       </div>
       {loading ? (
-        <LoadingMask loading={true} text={'loading...'} className='customize'>
+        <LoadingMask
+          loading={true}
+          text={'loading...'}
+          className='customize'
+          indicator={Spin}
+        >
           <div style={{ width: 200, height: 100 }}></div>
         </LoadingMask>
       ) : (

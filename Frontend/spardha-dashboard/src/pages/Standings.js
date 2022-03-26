@@ -5,10 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Footer from './components/Footer';
 import LoadingMask from 'react-loadingmask';
 import 'react-loadingmask/dist/react-loadingmask.css';
-
-const Spin = (
-  <i className='fas fa-sync-alt rc-loading-spin' />
-);
+import '@fortawesome/fontawesome-free/css/all.min.css';
+const Spin = <i className='fa-solid fa-spinner' style={{ color: 'black' }} />;
 
 const Standings = (props) => {
   const baseApiURL = 'https://swc.iitg.ac.in/spardhaApi/';
@@ -101,7 +99,12 @@ const Standings = (props) => {
       <div className='standings_h2 px-2'>TABULAR FORM</div>
       <div className='px-2'>
         {loading ? (
-          <LoadingMask loading={true} text={'loading...'} className='customize'>
+          <LoadingMask
+            loading={true}
+            text={'loading...'}
+            className='customize'
+            indicator={Spin}
+          >
             <div style={{ width: 200, height: 100 }}></div>
           </LoadingMask>
         ) : selectedSport === '-1' ? (
