@@ -157,11 +157,12 @@
   font-weight: 700;
   margin-top: 1.5rem;
   letter-spacing: 0.03rem;
-  width: 100%;
+  /* width: 100%; */
   border-top: 0.5px solid #e9e9eb;
   border-bottom: 0.5px solid #e9e9eb;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  word-wrap: break-word;
 }
 
 .results_header {
@@ -176,6 +177,7 @@
   border-bottom: 0.5px solid #e9e9eb;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  word-wrap: break-word;
 }
 
 .results_text {
@@ -184,9 +186,13 @@
 }
 
 .standings_dropdown {
-  flex: 1;
   border: none;
   background-color: #fff;
+  word-wrap: break-word;
+  font-size: 1.2rem;
+  text-align-last: right;
+  width: 50%;
+  text-overflow: ellipsis;
 }
 
 .standings_dropdown:focus {
@@ -195,9 +201,11 @@
 
 .standings_dropdown_text {
   font-weight: 300;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: right;
   padding-right: 0.5rem;
+  word-wrap: break-word;
+  direction: rtl;
 }
 
 .black_line {

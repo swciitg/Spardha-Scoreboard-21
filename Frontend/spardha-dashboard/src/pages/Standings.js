@@ -69,7 +69,7 @@ const Standings = (props) => {
 
   return (
     <div className='p-4 standings'>
-      <div className='standings_header d-flex flex-row align-items-center'>
+      <div className='standings_header d-flex flex-row align-items-center justify-content-between'>
         <div className='standings_text'>STANDINGS</div>
         <select
           onChange={sportHandler}
@@ -92,43 +92,47 @@ const Standings = (props) => {
         </select>
       </div>
       {/* <div className='w-100 black_line' /> */}
-      <div className='standings_h2'>TABULAR FORM</div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : selectedSport === '-1' ? (
-        overallStandings.map((hostel, i) => (
-          <StandingsItem
-            Name={hostel.name}
-            Points={hostel.overall_points}
-            Index={i}
-            Result={true}
-            Image={hostels.find(o => o.name === hostel.name)['logo']}
-          />
-        ))
-      ) : selectedSport === '-2' ? (
-        overallStandingsGirls.map((hostel, i) => (
-          <StandingsItem
-            Name={hostel.name}
-            Points={hostel.overall_points}
-            Index={i}
-            Result={true}
-            Image={hostels.find(o => o.name === hostel.name)['logo']}
-          />
-        ))
-      ) : (
-        standings.map((hostel, i) => (
-          <StandingsItem
-            Name={hostel.hostel}
-            Points={hostel.points}
-            Index={i}
-            Result={true}
-            Image={hostels.find(o => o.name === hostel.hostel)['logo']}
-          />
-        ))
-      )}
-      <div className="fixed-bottom fixed_footer">
-        <Footer />
+      <div className='standings_h2 px-2'>TABULAR FORM</div>
+      <div className="px-2">
+        {loading ? (
+          <p>Loading...</p>
+        ) : selectedSport === '-1' ? (
+          overallStandings.map((hostel, i) => (
+            <StandingsItem
+              Name={hostel.name}
+              Points={hostel.overall_points}
+              Index={i}
+              Result={true}
+              Image={hostels.find(o => o.name === hostel.name)['logo']}
+              className="m-2"
+            />
+          ))
+        ) : selectedSport === '-2' ? (
+          overallStandingsGirls.map((hostel, i) => (
+            <StandingsItem
+              Name={hostel.name}
+              Points={hostel.overall_points}
+              Index={i}
+              Result={true}
+              Image={hostels.find(o => o.name === hostel.name)['logo']}
+              className="m-2"
+            />
+          ))
+        ) : (
+          standings.map((hostel, i) => (
+            <StandingsItem
+              Name={hostel.hostel}
+              Points={hostel.points}
+              Index={i}
+              Result={true}
+              Image={hostels.find(o => o.name === hostel.hostel)['logo']}
+              className="m-2"
+            />
+          ))
+        )}
       </div>
+      <div className="pt-2 pb-3"></div>
+      <Footer />
     </div>
   );
 };
