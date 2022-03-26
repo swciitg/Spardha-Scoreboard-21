@@ -345,3 +345,7 @@
 .standings {
   margin-bottom: 5rem;
 }
+
+.customize.rc-loading::after {
+  background-color: #2170e8;
+}

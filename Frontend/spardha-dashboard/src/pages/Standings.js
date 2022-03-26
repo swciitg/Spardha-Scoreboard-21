@@ -6,6 +6,10 @@ import Footer from './components/Footer';
 import LoadingMask from 'react-loadingmask';
 import 'react-loadingmask/dist/react-loadingmask.css';
 
+const Spin = (
+  <i className='fas fa-sync-alt rc-loading-spin' />
+);
+
 const Standings = (props) => {
   const baseApiURL = 'https://swc.iitg.ac.in/spardhaApi/';
   const [hostelApiURL, setHostelApiURL] = useState(baseApiURL + 'hostels/');
@@ -97,7 +101,7 @@ const Standings = (props) => {
       <div className='standings_h2 px-2'>TABULAR FORM</div>
       <div className='px-2'>
         {loading ? (
-          <LoadingMask loading={true} text={'loading...'}>
+          <LoadingMask loading={true} text={'loading...'} className='customize'>
             <div style={{ width: 200, height: 100 }}></div>
           </LoadingMask>
         ) : selectedSport === '-1' ? (

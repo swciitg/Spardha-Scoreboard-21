@@ -115,7 +115,7 @@ const Schedule = (props) => {
         </div>
       </div>
       {loading ? (
-        <LoadingMask loading={true} text={'loading...'}>
+        <LoadingMask loading={true} text={'loading...'} className='customize'>
           <div style={{ width: 200, height: 100 }}></div>
         </LoadingMask>
       ) : (
