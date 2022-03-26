@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import Footer from './components/Footer';
+import LoadingMask from 'react-loadingmask';
+import 'react-loadingmask/dist/react-loadingmask.css';
 
 const Standings = (props) => {
   const baseApiURL = 'https://swc.iitg.ac.in/spardhaApi/';
@@ -93,9 +95,11 @@ const Standings = (props) => {
       </div>
       {/* <div className='w-100 black_line' /> */}
       <div className='standings_h2 px-2'>TABULAR FORM</div>
-      <div className="px-2">
+      <div className='px-2'>
         {loading ? (
-          <p>Loading...</p>
+          <LoadingMask loading={true} text={'loading...'}>
+            <div style={{ width: 200, height: 100 }}></div>
+          </LoadingMask>
         ) : selectedSport === '-1' ? (
           overallStandings.map((hostel, i) => (
             <StandingsItem
@@ -103,8 +107,8 @@ const Standings = (props) => {
               Points={hostel.overall_points}
               Index={i}
               Result={true}
-              Image={hostels.find(o => o.name === hostel.name)['logo']}
-              className="m-2"
+              Image={hostels.find((o) => o.name === hostel.name)['logo']}
+              className='m-2'
             />
           ))
         ) : selectedSport === '-2' ? (
@@ -114,8 +118,8 @@ const Standings = (props) => {
               Points={hostel.overall_points}
               Index={i}
               Result={true}
-              Image={hostels.find(o => o.name === hostel.name)['logo']}
-              className="m-2"
+              Image={hostels.find((o) => o.name === hostel.name)['logo']}
+              className='m-2'
             />
           ))
         ) : (
@@ -125,13 +129,13 @@ const Standings = (props) => {
               Points={hostel.points}
               Index={i}
               Result={true}
-              Image={hostels.find(o => o.name === hostel.hostel)['logo']}
-              className="m-2"
+              Image={hostels.find((o) => o.name === hostel.hostel)['logo']}
+              className='m-2'
             />
           ))
         )}
       </div>
-      <div className="pt-2 pb-3"></div>
+      <div className='pt-2 pb-3'></div>
       <Footer />
     </div>
   );

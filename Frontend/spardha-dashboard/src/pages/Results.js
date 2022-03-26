@@ -7,6 +7,8 @@ import CardB from './components/CardB';
 import CardC from './components/CardC';
 import CardD from './components/CardD';
 import Footer from './components/Footer';
+import LoadingMask from 'react-loadingmask';
+import 'react-loadingmask/dist/react-loadingmask.css';
 
 const Results = (props) => {
   // const [date, setDate] = useState(new Date());
@@ -88,13 +90,23 @@ const Results = (props) => {
               onChange={(date) => setDate(date)}
             />
           </div> */}
-          <select onChange={handleSportChange} className='results_dropdown w-2 first_filter' name='' id=''>
+          <select
+            onChange={handleSportChange}
+            className='results_dropdown w-2 first_filter'
+            name=''
+            id=''
+          >
             <option value=''>SPORT</option>
             {sports.map((sport, i) => (
               <option value={sport.id}>{sport.name}</option>
             ))}
           </select>
-          <select onChange={handleHostelChange} className='results_dropdown w-2' name='' id=''>
+          <select
+            onChange={handleHostelChange}
+            className='results_dropdown w-2'
+            name=''
+            id=''
+          >
             <option value=''>HOSTEL</option>
             {hostels.map((hostel, i) => (
               <option value={hostel.id}>{hostel.name}</option>
@@ -103,20 +115,57 @@ const Results = (props) => {
         </div>
       </div>
       {loading ? (
-        <p>Loading...</p>
-      ) : (matches.map((match, i) => (
-        {
-          'A': match.status === true && <CardA {...match} result={true} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
-          'B': match.status === true && <CardB {...match} result={true} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
-          'C': match.status === true && <CardC {...match} result={true} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
-          'D': match.status === true && <CardD {...match} result={true} hostels={hostels}/>
-        }[match.type]
-      ))
-      )} 
+        <LoadingMask loading={true} text={'loading...'}>
+          <div style={{ width: 200, height: 100 }}></div>
+        </LoadingMask>
+      ) : (
+        matches.map(
+          (match, i) =>
+            ({
+              A: match.status === true && (
+                <CardA
+                  {...match}
+                  result={true}
+                  image1={
+                    hostels.find((o) => o.name === match.team1)?.logo || 'alt'
+                  }
+                  image2={
+                    hostels.find((o) => o.name === match.team2)?.logo || 'alt'
+                  }
+                />
+              ),
+              B: match.status === true && (
+                <CardB
+                  {...match}
+                  result={true}
+                  image1={
+                    hostels.find((o) => o.name === match.team1)?.logo || 'alt'
+                  }
+                  image2={
+                    hostels.find((o) => o.name === match.team2)?.logo || 'alt'
+                  }
+                />
+              ),
+              C: match.status === true && (
+                <CardC
+                  {...match}
+                  result={true}
+                  image1={
+                    hostels.find((o) => o.name === match.team1)?.logo || 'alt'
+                  }
+                  image2={
+                    hostels.find((o) => o.name === match.team2)?.logo || 'alt'
+                  }
+                />
+              ),
+              D: match.status === true && (
+                <CardD {...match} result={true} hostels={hostels} />
+              ),
+            }[match.type])
+        )
+      )}
       <Footer />
     </div>
-
-    
   );
 };
 

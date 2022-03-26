@@ -7,6 +7,8 @@ import CardB from './components/CardB';
 import CardC from './components/CardC';
 import CardD from './components/CardD';
 import Footer from './components/Footer';
+import LoadingMask from 'react-loadingmask';
+import 'react-loadingmask/dist/react-loadingmask.css';
 
 const Schedule = (props) => {
   // const [date, setDate] = useState(new Date());
@@ -88,13 +90,23 @@ const Schedule = (props) => {
               onChange={(date) => setDate(date)}
             />
           </div> */}
-          <select onChange={handleSportChange} className='results_dropdown w-2 first_filter' name='' id=''>
+          <select
+            onChange={handleSportChange}
+            className='results_dropdown w-2 first_filter'
+            name=''
+            id=''
+          >
             <option value=''>SPORT</option>
             {sports.map((sport, i) => (
               <option value={sport.id}>{sport.name}</option>
             ))}
           </select>
-          <select onChange={handleHostelChange} className='results_dropdown w-2' name='' id=''>
+          <select
+            onChange={handleHostelChange}
+            className='results_dropdown w-2'
+            name=''
+            id=''
+          >
             <option value=''>HOSTEL</option>
             {hostels.map((hostel, i) => (
               <option value={hostel.id}>{hostel.name}</option>
@@ -103,16 +115,58 @@ const Schedule = (props) => {
         </div>
       </div>
       {loading ? (
-        <p>Loading...</p>
-      ) : (matches.slice(0).reverse().map((match, i) => (
-        {
-          'A': match.status === false && <CardA {...match} result={false} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
-          'B': match.status === false && <CardB {...match} result={false} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
-          'C': match.status === false && <CardC {...match} result={false} image1={hostels.find(o => o.name === match.team1)?.logo || "alt"} image2={hostels.find(o => o.name === match.team2)?.logo || "alt"}/>,
-          'D': match.status === false && <CardD {...match} result={false} hostels={hostels}/>
-        }[match.type]
-      ))
-      )} 
+        <LoadingMask loading={true} text={'loading...'}>
+          <div style={{ width: 200, height: 100 }}></div>
+        </LoadingMask>
+      ) : (
+        matches
+          .slice(0)
+          .reverse()
+          .map(
+            (match, i) =>
+              ({
+                A: match.status === false && (
+                  <CardA
+                    {...match}
+                    result={false}
+                    image1={
+                      hostels.find((o) => o.name === match.team1)?.logo || 'alt'
+                    }
+                    image2={
+                      hostels.find((o) => o.name === match.team2)?.logo || 'alt'
+                    }
+                  />
+                ),
+                B: match.status === false && (
+                  <CardB
+                    {...match}
+                    result={false}
+                    image1={
+                      hostels.find((o) => o.name === match.team1)?.logo || 'alt'
+                    }
+                    image2={
+                      hostels.find((o) => o.name === match.team2)?.logo || 'alt'
+                    }
+                  />
+                ),
+                C: match.status === false && (
+                  <CardC
+                    {...match}
+                    result={false}
+                    image1={
+                      hostels.find((o) => o.name === match.team1)?.logo || 'alt'
+                    }
+                    image2={
+                      hostels.find((o) => o.name === match.team2)?.logo || 'alt'
+                    }
+                  />
+                ),
+                D: match.status === false && (
+                  <CardD {...match} result={false} hostels={hostels} />
+                ),
+              }[match.type])
+          )
+      )}
       <Footer />
     </div>
   );
