@@ -3,7 +3,7 @@ import StandingsItem from './StandingsItem';
 
 const ResultB = (props) => {
 
-    console.log(props.scores);
+    // console.log(props.scores);
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
