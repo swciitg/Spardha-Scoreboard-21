@@ -122,7 +122,7 @@ const Standings = (props) => {
             Points={hostel.points}
             Index={i}
             Result={true}
-            Image={hostels.find(o => o.name === hostel.name)['logo']}
+            Image={hostels.find(o => o.name === hostel.hostel)['logo']}
           />
         ))
       )}

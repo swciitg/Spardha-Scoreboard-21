@@ -36,7 +36,7 @@ const ResultB = (props) => {
             <div className="d-flex flex-row justify-content-between mt-1 align-items-center">
                 <div className="result_stage">{props.round}</div>
                 {props.result && 
-                <div className="result_final_text">{Object.keys(props.scores)[0]} won</div>
+                <div className="result_final_text">{props.scores[0].hostel} won</div>
                 }
             </div>
         </div>
