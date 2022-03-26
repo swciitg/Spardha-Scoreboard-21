@@ -59,7 +59,7 @@ const Schedule = (props) => {
     // console.log(selectedSport);
     axios.get(matchesApiURLnew)
         .then((response) => {
-          // console.log(response.data);
+        // console.log(response.data);
           setMatches(response.data.data);
           setLoading(false);
         });

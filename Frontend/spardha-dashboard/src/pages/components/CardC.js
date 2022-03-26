@@ -60,6 +60,23 @@ return (
                 </div>
             </div>
         ))}
+
+        {!props.result && (
+            <div className="result_details">
+            <div className="d-flex flex-row justify-content-between result_list_item">
+                <div className="result_hostel d-flex flex-row align-items-center">
+                    <div className="standings_item_circle blank_circle" style={{backgroundImage: `url(${props.image1})`}}></div>
+                    <div className="standings_item_name">{props.team1}</div>
+                </div>
+            </div>
+            <div className="d-flex flex-row justify-content-between result_list_item">
+                <div className="result_hostel d-flex flex-row align-items-center">
+                    <div className="standings_item_circle blank_circle" style={{backgroundImage: `url(${props.image2})`}}></div>
+                    <div className="standings_item_name">{props.team2}</div>
+                </div>
+            </div>
+        </div>
+        )}
         
         <div className="d-flex flex-row justify-content-between align-items-center">
             <div className="result_stage">{props.stage}</div>

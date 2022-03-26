@@ -254,6 +254,10 @@
   box-shadow: 0px 0px 15px #57607144;
 }
 
+.result_final_text {
+  text-align: right;
+}
+
 .result_sport {
   font-weight: 700;
   color: #384558;
