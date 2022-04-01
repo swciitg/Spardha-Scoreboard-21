@@ -10,13 +10,38 @@ const CardC = (props) => {
 
     var time = toDateWithOutTimeZone(props.time);
 
-    var wtt = '1'; //winner team text
-    var ltt = '2'; //loser team text
     var team1_winner = true;
+
     if(props.result && props.winner === 2){
-        wtt = '2';
-        ltt = '1';
         team1_winner = false;
+    }
+
+    if(props.result){
+        var wtt = [];
+        var ltt = [];
+        var winners = [];
+        for (const key in props.sets) {
+            var count = 0;
+            for(var j =1; j <=5; j++){
+                if(props.sets[key]['team1_game'+j] !== null){
+                    if(props.sets[key]['team1_game'+j]>props.sets[key]['team2_game'+j]){
+                        count++;
+                    }else if(props.sets[key]['team1_game'+j]<props.sets[key]['team2_game'+j]){
+                        count--;
+                    }
+                }
+            }
+            if(count >= 0){
+                winners.push(true);
+                wtt.push('1');
+                ltt.push('2');
+            }
+            else{
+                winners.push(false);
+                wtt.push('2');
+                ltt.push('1');
+            }
+        }
     }
 
 return (
@@ -31,30 +56,30 @@ return (
                 <div className="d-flex flex-row justify-content-between result_list_item">
                     <div className="result_hostel d-flex flex-row align-items-center">
                         <div className="standings_item_circle blank_circle" style={{backgroundImage: `url(${team1_winner ? props.image1 : props.image2})`}}></div>
-                        <div className="standings_item_name">{team1_winner ? props.team1 : props.team2}</div>
+                        <div className="standings_item_name">{winners[i] ? props.team1 : props.team2}</div>
                     </div>
                     {props.result && 
                     <div className="d-flex flex-row align-items-center">
-                        {set['team'+wtt+'_game1'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt+'_game1']}</div>}
-                        {set['team'+wtt+'_game2'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt+'_game2']}</div>}
-                        {set['team'+wtt+'_game3'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt+'_game3']}</div>}
-                        {set['team'+wtt+'_game4'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt+'_game4']}</div>}       
-                        {set['team'+wtt+'_game5'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt+'_game5']}</div>}
+                        {set['team'+wtt[i]+'_game1'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt[i]+'_game1']}</div>}
+                        {set['team'+wtt[i]+'_game2'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt[i]+'_game2']}</div>}
+                        {set['team'+wtt[i]+'_game3'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt[i]+'_game3']}</div>}
+                        {set['team'+wtt[i]+'_game4'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt[i]+'_game4']}</div>}       
+                        {set['team'+wtt[i]+'_game5'] !== null && <div className="result_score_winner standings_item_name">{set['team'+wtt[i]+'_game5']}</div>}
                         <img src="./left_arrow.png" alt="arrow" className="arrow_img" />
                     </div>}
                 </div>
                 <div className="d-flex flex-row justify-content-between result_list_item">
                     <div className="result_hostel d-flex flex-row align-items-center">
                         <div className="standings_item_circle blank_circle" style={{backgroundImage: `url(${team1_winner ? props.image2 : props.image1})`}}></div>
-                        <div className="standings_item_name">{team1_winner ? props.team2 : props.team1}</div>
+                        <div className="standings_item_name">{winners[i] ? props.team2 : props.team1}</div>
                     </div>
                     {props.result && 
                     <div className="d-flex flex-row align-items-center loser_div">
-                        {set['team'+ltt+'_game1'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt+'_game1']}</div>}
-                        {set['team'+ltt+'_game2'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt+'_game2']}</div>}
-                        {set['team'+ltt+'_game3'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt+'_game3']}</div>}
-                        {set['team'+ltt+'_game4'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt+'_game4']}</div>}       
-                        {set['team'+ltt+'_game5'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt+'_game5']}</div>}
+                        {set['team'+ltt[i]+'_game1'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt[i]+'_game1']}</div>}
+                        {set['team'+ltt[i]+'_game2'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt[i]+'_game2']}</div>}
+                        {set['team'+ltt[i]+'_game3'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt[i]+'_game3']}</div>}
+                        {set['team'+ltt[i]+'_game4'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt[i]+'_game4']}</div>}       
+                        {set['team'+ltt[i]+'_game5'] !== null && <div className="result_score_loser standings_item_name">{set['team'+ltt[i]+'_game5']}</div>}
                     </div>
                     }
                 </div>
